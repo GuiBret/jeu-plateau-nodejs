@@ -1,0 +1,18 @@
+{
+  "spec_dir": "spec",
+  "spec_files": [
+    "game.spec.js",
+    "grille.spec.js",
+    "requestmanager.spec.js",
+    "database.spec.js",
+    "profile.spec.js",
+    "gamehub.spec.js",
+    "gamesearchsocketmanager.spec.js",
+    "gamesocketmanager.spec.js"
+  ],
+  "helpers": [
+    "helpers/**/*.js"
+  ],
+  "stopSpecOnExpectationFailure": false,
+  "random": false
+}

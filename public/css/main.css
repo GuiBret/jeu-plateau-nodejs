@@ -1,0 +1,36 @@
+@font-face {
+    font-family:"Suicide Squad";
+    src:url("../assets/ssfont.ttf");
+}
+
+
+@font-face {
+    font-family:"Typewriter";
+    src:url("../assets/TravelingTypewriter.ttf");
+}
+
+
+html, body {
+    height:100%;
+}
+
+body {
+    font-family:"Typewriter";
+}
+
+/* TITRES */
+
+h1,h2,h3,h4,h5,h6 {
+    font-family:"Suicide Squad";
+}
+
+#page-title {
+    position:relative;
+    top:5%;
+    text-align:center;
+}
+
+.container-fluid {
+    padding:0;
+}
+

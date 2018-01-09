@@ -1,0 +1,21 @@
+{
+    /* panel connexion */
+    
+    "Nom d'utilisateur": "Username",
+    "Mot de passe": "Password",
+    "Connexion": "Login",
+    "Si vous tapez un nouveau nom d'utilisateur / mot de passe, votre compte sera automatiquement créé": "If you enter a new username / password, your account will be automatically created",
+    "ou": "or",
+    "Connexion invité": "Connect as guest",
+    "Si vous vous connectez comme invité, vos victoires ne seront pas conservées en mémoire": "If you connect as guest, your matches won't be stored in memory",
+    
+    /* main menu */
+    "1V1 en ligne": "1V1 online",
+    "Aucun utilisateur connecté": "No connected user",
+    "Duel contre l'IA": "Player vs AI",
+    "Duel en local": "Local match",
+    "Mon profil": "My profile",
+    "Options": "Preferences",
+    "Connecté en tant que": "Connected as"
+    
+}

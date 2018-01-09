@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+    <head>
+        <%- include header-links.ejs %>
+        <link rel="stylesheet" href="/public/css/main-menu.css" />
+        <title>Menu principal</title>
+    
+    </head>
+    <body>
+        
+        <div class="container-fluid">
+            <h1 class="col-12 text-md-center" id="page-title">Jusqu'a la mort</h1>
+            
+            <div id="container-buttons" class="d-flex flex-column col-12 justify-content-around">
+                <div class="button_container col-12 col-md-6 offset-md-3" id="container_1v1_online">
+                    <button class="btn btn-primary" id="btn-1v1-online">1V1 en ligne</button>
+                    <label class="d-block text-center">Aucun utilisateur connecté</label>
+                </div>
+                 
+                <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_ia">
+                    <button class="btn btn-primary" id="btn-ia" disabled>Duel contre l'IA</button>
+                </div>
+                
+                <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_1v1_local">
+                    <button class="btn btn-primary" id="btn-1v1-local" >Duel en local</button>
+                </div>
+                
+                <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_profile">
+                    <button class="btn btn-primary" id="btn-profile" disabled>Mon profil</button>
+                </div>
+                
+                <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_options">
+                    <button class="btn btn-primary" id="btn-options" disabled>Options</button>
+                </div>
+            
+            </div> 
+            <div id="connected-as">
+                <p class="text-center text-md-right">Connecté en tant que : <span id="username_label">Invité</span></p>
+            </div>
+            
+        </div>
+        <%- include script-links.ejs %>
+        <script type="text/javascript" src="/public/js/interface/main-menu.js"></script>
+    
+    </body>
+
+
+</html>

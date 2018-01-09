@@ -1,0 +1,29 @@
+.button_container button {
+    width:100%;
+}
+
+.container-fluid {
+    height:100%;
+}
+
+#container-buttons {
+    position:relative;
+    top:50%;
+    margin-top:-15%;
+    height:15%;
+}
+
+#connected-as {
+    position: absolute;
+    bottom: 0;
+    width:100%;
+}
+
+/* Affichage desktop */
+@media screen and (min-width:769px) {  /* text-md-right, on décale le texte de #connected-as de la marge*/
+
+    #connected-as {
+        right:1rem;
+    }
+
+}

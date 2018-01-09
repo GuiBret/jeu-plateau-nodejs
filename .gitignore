@@ -1,0 +1,7 @@
+docs-perso/*
+coverage/*
+node_modules/*
+
+!*/node_modules/jeu-backend/**
+!*/node_modules/jeu-backend/managers/*
+

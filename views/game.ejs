@@ -1,0 +1,98 @@
+<!doctype html>
+
+
+
+<html>
+
+    <head>
+
+        <%- include header-links.ejs %>
+        <link rel='stylesheet' href="/public/css/game.css" />
+        <title>Partie en local</title>
+        
+
+    
+
+    
+
+    </head>
+
+    
+
+    <body>
+
+
+        <h1>Jusqu'à la mort</h1>
+
+        <div class="espace_jeu d-flex flex-column flex-sm-row">
+
+            <table id='grille'>
+
+                <tbody></tbody>
+
+            </table>
+
+            <div id='panel-interfaces' class="col-12 col-sm-3 d-flex flex-row flex-sm-column justify-content-around">
+
+                <div id='interface_1'>
+
+                    <h3 class='nom_joueur text-center' id='nom_j1'>Joueur 1</h3>
+
+                    <div class="row text-center">
+                        <div class="col-6 offset-3 col-sm-3 offset-sm-2 container-image-joueur">
+                            <img class='img_interface_joueur interface-joueur1' src='/public/img/j_arme1.png'/>
+                        </div>
+                        <div class="col-12 col-md-7">
+
+                            <span class="description-arme">Arme: <span id="nom_arme_j1">Revolver</span></span> <br />
+                            <span class="degats">Degâts : <span id="degats_arme_j1">10</span> PV</span>
+
+                        </div>
+
+                    </div>
+                    <div class="col-12 text-center">
+
+                        <progress max="100" value="100" id='barre_j1'></progress> <br />
+                        <span id='vie_j1' class="vie">100/100 PV</span> <br />
+
+                    </div>
+                </div>
+
+                <div id='interface_2'>
+
+                    <h3 class='nom_joueur text-center' id='nom_j2'>Joueur 2</h3>
+                    <div class="row text-center">
+                        <div class="col-6 offset-3 col-md-3 offset-md-2 container-image-joueur">
+                            <img class='img_interface_joueur interface-joueur2' src='/public/img/j_arme1.png'/>
+                        </div>
+                        <div class="col-12 col-md-7">
+
+                            <span class="description-arme">Arme : <span id="nom_arme_j2">Revolver</span></span> <br />
+                            <span class="degats">Degâts: <span id='degats_arme_j2'>10</span> PV</span>
+
+                        </div>
+                    </div>
+                    <div class="col-12 text-center">
+
+                        <progress max="100" value="100" id="barre_j2"></progress> <br />
+                        <span id='vie_j2' class="vie text-center">100/100 PV</span><br />
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <%- include script-links.ejs %>
+        <%- include game-scripts.ejs %>
+    
+
+    </body>
+
+
+
+
+
+</html>

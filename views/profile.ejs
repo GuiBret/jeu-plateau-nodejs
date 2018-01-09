@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html>
+    <head>
+        <%- include header-links.ejs %>
+        <link rel="stylesheet" type="text/css" href="/public/css/tpl-connect-panel.css" />
+
+        <title>Mon profil</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <h1>Mon profil</h1>
+            
+            <div class="col-12 col-md-4 offset-md-4">
+                <h2>Mes informations</h2>
+                <p><strong>Nom : </strong><span id="nom"><%- info.username -%></span></p>
+                
+            </div>
+        </div>
+        
+        <%- include script-links.ejs %>
+        <script type="text/javascript" src="/public/js/interface/profile.js"></script>
+    </body>
+
+</html>

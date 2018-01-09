@@ -1,0 +1,17 @@
+.container-fluid {
+    height:100%;
+    position:relative; /* Utile pour centrer contenu page */
+}
+
+#page {
+    position:relative; 
+    top:50%;
+    margin-top:-15%; 
+}
+
+@media screen and (max-device-width: 420px) {
+    #page {
+        top:10%;
+        margin-top: 0;
+    }
+}

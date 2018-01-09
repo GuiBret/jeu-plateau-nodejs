@@ -1,0 +1,21 @@
+{
+    "name": "jeu-plateau-nodejs",
+    "description": "Un jeu de plateau originellement solo modifié pour le multi",
+    "version": "1.0.0",
+    "engines": {
+        "node": "9.3.0"
+    },
+    "dependencies": {
+        "ejs": "^2.5.7",
+        "express": "^4.16.2",
+        "jasmine": "^2.8.0",
+        "md5": "^2.2.1",
+        "mysql": "^2.15.0",
+        "socket.io": "^2.0.4"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "tests": "jasmine",
+        "test": "istanbul cover node_modules/jasmine/bin/jasmine.js"
+    }
+}
