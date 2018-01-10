@@ -19,6 +19,10 @@
     width:100%;
 }
 
+@media screen and (max-device-width:420px) {
+    height:10%; /* Pour afficher correctement tous les boutons (si on le met en global, ils sont écrasés en desktop) */
+}
+
 /* Affichage desktop */
 @media screen and (min-width:769px) {  /* text-md-right, on décale le texte de #connected-as de la marge*/
 

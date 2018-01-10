@@ -8,17 +8,9 @@ if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If 
 
 $("document").ready(function() {
     
-    
-    $("#username, #password").on("change paste keyup", listenerFormConnexion); // Désactive bouton "Connexion" si l'un des deux champs est vide
-    
-    
+    $("#username, #password").on("change paste keyup", listenerFormConnexion); // Disables the "Connection" button if any of username and password's value is empty
   
-    $("#guest-button").on("click", function() {
-       sessionStorage.setItem("username", "Invité");
-        sessionStorage.setItem("password", "");
-        sessionStorage.setItem("id", "-1");
-       window.location.replace("menu/");
-   });
+    $("#guest-button").on("click", defineGuestConnectionData); // Defines the sessionStorage's settings of a guest, then redirects to menu
     
     $("#connect-button").on("click", function(e) {
         e.preventDefault();
@@ -80,4 +72,11 @@ $("document").ready(function() {
 
 function listenerFormConnexion() {
     $("#connect-button").attr("disabled", $("#username").val() === "" || $("#password").val() === "");
+}
+
+function defineGuestConnectionData() {
+    sessionStorage.setItem("username", "Invité");    
+    sessionStorage.setItem("password", "");
+    sessionStorage.setItem("id", "-1");
+    window.location.replace("menu/");
 }
