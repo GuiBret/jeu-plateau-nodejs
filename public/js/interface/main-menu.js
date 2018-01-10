@@ -39,8 +39,11 @@ $("document").ready(function() {
            case "btn-profile":
                 window.location.replace(`../profile/${sessionStorage.getItem("id")}`);
             break;
+           case "btn-disconnect":
+                handleDisconnect();
+            break;
            default:
-               break;
+            break;
        } 
     });
 });
@@ -62,4 +65,13 @@ function verifClientConnecte() {
             }
         })
     }
+}
+
+
+function handleDisconnect() {
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("username");
+    sessionStorage.removeItem("password");
+    
+    window.location.replace("../");
 }
