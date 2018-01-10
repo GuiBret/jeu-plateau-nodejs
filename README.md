@@ -28,7 +28,7 @@ Les tests vérifient les éléments suivants :
 - grille.spec.js
   - Création de la grille
   - Gestion des déplacements
-
+sudo 
 - database.spec.js
   - Connexions à la base de données
   - Extraction de données des joueurs

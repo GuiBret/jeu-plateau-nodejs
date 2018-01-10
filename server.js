@@ -4,7 +4,6 @@ let express = require('express'),
     io = require('socket.io')(server),
     ejs = require("ejs"),
     Game = require("./node_modules/jeu-backend/game.js"),
-    path = require("path"),
     DatabaseConnection = require("./node_modules/jeu-backend/utils/database_connection.js"),
     DBConnection = new DatabaseConnection(),
     GameHub = require("./node_modules/jeu-backend/managers/GameHub.js"),
@@ -30,9 +29,7 @@ io.sockets.on("connection", function(socket) {
 let gameServer = require("http").Server(app),
     io_gameserv = require('socket.io')(gameServer);
 
-gameServer.listen(process.env.PORT || 5001, function() {
-    
-});
+gameServer.listen(process.env.PORT || 5001);
 
 io_gameserv.on("connection", function(socket) {
     let gsm = new GameSocketManager(socket, DBConnection, io_gameserv, gh);

@@ -9,7 +9,7 @@ if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If 
 $("document").ready(function() {
     
     
-    
+    $("#username, #password").on("change", listenerFormConnexion); // Désactive bouton "Connexion" si l'un des deux champs est vide
     
     
   
@@ -77,3 +77,7 @@ $("document").ready(function() {
     });
 });
 
+
+function listenerFormConnexion() {
+    $("#connect-button").attr("disabled", $("#username").val() === "" || $("#password").val() === "");
+}
