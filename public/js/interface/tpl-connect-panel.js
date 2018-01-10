@@ -9,7 +9,7 @@ if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If 
 $("document").ready(function() {
     
     
-    $("#username, #password").on("change", listenerFormConnexion); // Désactive bouton "Connexion" si l'un des deux champs est vide
+    $("#username, #password").on("change paste keyup", listenerFormConnexion); // Désactive bouton "Connexion" si l'un des deux champs est vide
     
     
   
