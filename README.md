@@ -8,9 +8,9 @@ Ce repo est une variante d'un projet de jeu plateau multijoueur sur un même cli
 
 Il dispose des fonctionnalités du jeu originel ainsi que certains ajouts : 
 * Ajout d'un mode 1 contre 1 en ligne **(fonctionnel)**
-* Conservation des victoires et possibilité de connexion **(connexion possible, conservation des victoires en cours d'implémentation)**
-* Ajout d'un mode versus IA **(en prévision)**
+* Conservation des victoires et possibilité de connexion **(fonctionnel)**
 * Gestion d'options (langue, son, etc.) **(en prévision)**
+* Ajout d'un mode versus IA **(en prévision)**
 * Présence d'un leaderboard **(en prévision)**
 
 
