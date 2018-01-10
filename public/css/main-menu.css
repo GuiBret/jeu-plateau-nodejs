@@ -20,7 +20,11 @@
 }
 
 @media screen and (max-device-width:420px) {
-    height:10%; /* Pour afficher correctement tous les boutons (si on le met en global, ils sont écrasés en desktop) */
+    
+    #container-buttons {
+        height:10%; /* Pour afficher correctement tous les boutons (si on le met en global, ils sont écrasés en desktop) */    
+    }
+    
 }
 
 /* Affichage desktop */
