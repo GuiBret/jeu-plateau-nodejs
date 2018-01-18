@@ -171,8 +171,6 @@ class Grille {
     
     appliquerAnimation(anc_case, nv_case, joueur_actuel) {
         
-        
-        console.log(joueur_actuel);
         if(!this.dimensionsJoueurs) { // Si on n'a pas les dimensions d'un joueur (normalement au premier tour), on les calcule et les stocke (pour que l'image qui se déplacera ait la même taille que l'image d'origine)
             this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
         
