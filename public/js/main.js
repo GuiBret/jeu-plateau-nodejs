@@ -3,6 +3,7 @@
 /*globals $, Joueur, Interface, Grille */
 
 var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:5001" : `http://${window.location.hostname}:5001`),
+    sm = new SoundManager(),
     game_id,
     grille,
     joueurs,

@@ -105,7 +105,6 @@ class Grille {
                  nv_case = $("#"+ nv_position.join("-")),
                  arme_posee = false;
             
-            console.log(anc_case);
             anc_case.html(""); // On efface la case actuelle
         
         
