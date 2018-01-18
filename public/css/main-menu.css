@@ -3,6 +3,18 @@
     background-color:green;
 }
 
+/* Provisoire*/
+
+.button_container button:disabled {
+    width:100%;
+    background-color:green;
+}
+
+
+.button_container button:hover {
+    background-color:#006300;
+}
+
 .container-fluid {
     height:100%;
 }
@@ -27,6 +39,8 @@
     }
     
 }
+
+
 
 /* Affichage desktop */
 @media screen and (min-width:769px) {  /* text-md-right, on décale le texte de #connected-as de la marge*/

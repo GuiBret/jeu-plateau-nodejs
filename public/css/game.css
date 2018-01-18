@@ -2,28 +2,18 @@
 td {
 
     background-image:url("../img/case.jpg");
-
     height:50px;
-
     width:50px;
-
     background-size:contain;
-
     background-repeat:no-repeat;
-
     text-align:center; /* Pour centrer les images de joueurs */
-
 }
 
 table {
 
     border-collapse:collapse;
-
     table-layout:fixed;
-
     float:left;
-
-
 
 }
 
@@ -31,8 +21,6 @@ table {
 
     filter:invert(100%);
     -webkit-filter:invert(100%);
-
-
 }
 
 
@@ -40,7 +28,6 @@ table {
 .img_arme, .joueur1, .joueur2 {
 
     width:70%;
-
     height:70%;
 
 }
@@ -99,11 +86,13 @@ table {
 progress {
 
     -webkit-appearance: none;
-
     -moz-appearance: none;
-
     appearance:none;
 
+}
+
+#boutons_combat {
+    padding:0;
 }
 
 
@@ -179,7 +168,7 @@ span.vie, span.description-arme, span.degats {
 
 
 /* Affichage mobile */
-@media screen and (max-width:580px) {
+@media screen and (max-width:576px) {
 
     td {
         height:calc(100% / 11);
@@ -219,12 +208,17 @@ span.vie, span.description-arme, span.degats {
 
 }
 
+
 /* Affichage desktop */
-@media screen and (min-width:581px) {/* À partir de 580px, on fixe la taille des cellules, 581px = (50 * 11) + 30 (marge latérale) */
+@media screen and (min-device-width:577px) {/* À partir de 577px, on fixe la taille des cellules, 581px = (50 * 11) + 30 (marge latérale) et on met la progress bar en full width (pour éviter le décalage sur petits écrans) */
 
     td {
         height:50px;
         width:50px;
+    }
+    
+    progress {
+        width:100%;
     }
 
 }
