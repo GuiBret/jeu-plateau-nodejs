@@ -4,6 +4,7 @@ class Grille {
     constructor(grid_content) {
         this.grille = grid_content;
         this.genGrilleEcran();
+        this.dimensionsJoueurs; // Pour animations
     }
     
     genGrilleEcran() { // Génération de la carte frontend
@@ -104,11 +105,10 @@ class Grille {
                  nv_case = $("#"+ nv_position.join("-")),
                  arme_posee = false;
             
-
-            image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
-            image_joueur.addClass("joueur"+ String(joueur_actuel.id+1)); // On applique la classe au joueur (permettant le changement de couleur)
-
+            console.log(anc_case);
             anc_case.html(""); // On efface la case actuelle
+        
+        
 
             var anc_case_back = this.grille[anc_position[0]][anc_position[1]];
 
@@ -125,16 +125,18 @@ class Grille {
                 //joueur_actuel.ancienne_arme = -1;
                 arme_posee = true; // Signale au serveur qu'on a posé une arme au tour précédent (lui dit de reset joueur_actuel.ancienne_arme);
             }
+        
+        if(1+1 === 2) { // Condition préparant arrivée des options (si animations activées, on anime, sinon on efface et affiche uniquement), ici animation
+            this.appliquerAnimation(anc_case, nv_case, joueur_actuel);
             
-
-
+        } else {
+            
             nv_case.html(image_joueur); // On applique l'image à la nouvelle case
-
-            $(".dep_possible").removeClass("dep_possible"); // On efface les déplacements possibles
-
+        }
+            
         
 
-        nv_case.html(image_joueur); // On applique l'image à la nouvelle case
+        
 
         $(".dep_possible").removeClass("dep_possible"); // On efface les déplacements possibles
         
@@ -142,7 +144,8 @@ class Grille {
 
 
    
-            }
+            
+    }
     
     
     
@@ -164,6 +167,51 @@ class Grille {
     
     updateGrille(grid) {
         this.grille = grid;
+    }
+    
+    appliquerAnimation(anc_case, nv_case, joueur_actuel) {
+        
+        
+        console.log(joueur_actuel);
+        if(!this.dimensionsJoueurs) { // Si on n'a pas les dimensions d'un joueur (normalement au premier tour), on les calcule et les stocke (pour que l'image qui se déplacera ait la même taille que l'image d'origine)
+            this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
+        
+        }
+        
+        
+        
+        let anc_position = this.calculPositionAnimation(anc_case),
+            nv_position = this.calculPositionAnimation(nv_case),
+            $elem_animation = $(`<img src='/public/img/j_arme1.png' class="animation-deplacement joueur${joueur_actuel.id+1}-anim" />`),
+            image_joueur = $("<img></img>");
+    
+        
+            
+        image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
+        image_joueur.addClass("joueur"+ String(joueur_actuel.id+1)); // On applique la classe au joueur (permettant le changement de couleur)
+        
+        $elem_animation.offset(anc_position);
+        $elem_animation.css(this.dimensionsJoueurs); // On applique les dimensions à l'image
+        
+        $("body").append($elem_animation);
+        
+        $elem_animation.animate({left: nv_position.left, top:nv_position.top}, 400, () => {
+            
+            // Quand l'animation est finie, on affiche l'image de la nouvelle position et on supprime l'animation 
+            nv_case.html(image_joueur);
+            
+            $(".animation-deplacement").remove();
+            
+        });
+    }
+    
+    calculPositionAnimation(case_jeu) { // Calcule la position de départ de l'image qu'on animera pour simuler le déplacement (besoin d'avoir le point central de l'image d'origine)
+        let position = case_jeu.offset();
+        console.log(position);
+        position.left += ((50 - this.dimensionsJoueurs.width) / 2); 
+        position.top += ((50 - this.dimensionsJoueurs.height) / 2);
+        console.log(position);
+        return position;
     }
 
 

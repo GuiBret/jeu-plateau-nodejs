@@ -2,7 +2,7 @@
 
 /*globals $, Joueur, Interface, Grille */
 
-var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:8080" : `http://${window.location.hostname}:5001`),
+var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:5001" : `http://${window.location.hostname}:5001`),
     game_id,
     grille,
     joueurs,

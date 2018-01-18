@@ -91,6 +91,11 @@ table {
 
 }
 
+.joueur1-anim {
+    filter:hue-rotate(-120deg);
+    -webkit-filter:hue-rotate(-120deg);
+}
+
 progress {
 
     -webkit-appearance: none;
@@ -102,7 +107,9 @@ progress {
 }
 
 
-
+.animation-deplacement {
+    position:absolute;
+}
 
 
 /* Opera / Chrome */

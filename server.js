@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 let RequestManager = require("./node_modules/jeu-backend/managers/RequestManager.js"),
     rm = new RequestManager(app, DBConnection);
 
-server.listen(process.env.PORT || 5000);
+server.listen(5000);
 
 
 io.sockets.on("connection", function(socket) {
@@ -29,7 +29,7 @@ io.sockets.on("connection", function(socket) {
 let gameServer = require("http").Server(app),
     io_gameserv = require('socket.io')(gameServer);
 
-gameServer.listen(process.env.PORT || 5001);
+gameServer.listen(5001);
 
 io_gameserv.on("connection", function(socket) {
     let gsm = new GameSocketManager(socket, DBConnection, io_gameserv, gh);

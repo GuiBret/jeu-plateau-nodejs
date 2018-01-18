@@ -1,4 +1,4 @@
-var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:8080" : `http://${window.location.hostname}:5000`);
+var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:5000" : `http://${window.location.hostname}:5000`);
 
 
 if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If user credentials already are in the sessionstorage, we redirect the user to the main menu
