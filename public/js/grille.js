@@ -206,10 +206,11 @@ class Grille {
     }
     
     calculPositionAnimation(case_jeu) { // Calcule la position de départ de l'image qu'on animera pour simuler le déplacement (besoin d'avoir le point central de l'image d'origine)
-        let position = case_jeu.offset();
+        let position = case_jeu.offset(),
+            dimension_case = $("td").height();
         console.log(position);
-        position.left += ((50 - this.dimensionsJoueurs.width) / 2); 
-        position.top += ((50 - this.dimensionsJoueurs.height) / 2);
+        position.left += ((dimension_case - this.dimensionsJoueurs.width) / 2); 
+        position.top += ((dimension_case - this.dimensionsJoueurs.height) / 2);
         console.log(position);
         return position;
     }
