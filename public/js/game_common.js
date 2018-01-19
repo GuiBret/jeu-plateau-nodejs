@@ -13,7 +13,7 @@ function resizeGrid() {
         }
 }
 
-function affichageFinPartie(infos, joueur_actuel) {
+function affichageFinPartieOnline(infos, joueur_actuel) {
     let dialog_text;
 
         if(infos["winner"] === joueur_actuel.nom) {
@@ -21,9 +21,24 @@ function affichageFinPartie(infos, joueur_actuel) {
         } else {
             dialog_text = {"title": "Défaite...", "content": `Vous avez perdu contre ${infos["winner"]} en ${infos["turns"]} tours...`};
         }
-        let $dialog = $(`<div id="endgame_dialog" title="${dialog_text["title"]}">${dialog_text["content"]}</div>`);
+    
+        afficherDialogFinPartie(dialog_text);
         
-        $dialog.dialog({
+        
+}
+
+function affichageFinPartieOffline(infos) {
+    
+    let dialog_text= {"title": "Fin de partie", "content": `${infos["winner"]} a gagné en ${infos["turns"]} tours !`};
+    
+    afficherDialogFinPartie(dialog_text);
+    
+} 
+
+function afficherDialogFinPartie(dialog_text) {
+    let $dialog = $(`<div id="endgame_dialog" title="${dialog_text["title"]}">${dialog_text["content"]}</div>`);
+    
+    $dialog.dialog({
             modal:true,
             buttons: {
                 Ok: function() {
@@ -34,10 +49,10 @@ function affichageFinPartie(infos, joueur_actuel) {
                     }
             
             }
-
         });
+    
+    
 }
-
 /* Fonctions utilitaires */
 
 function isLocal() { // utility functions which checks if the game is a local or online one according to the url

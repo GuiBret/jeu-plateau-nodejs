@@ -193,8 +193,14 @@ $(document).ready(function () {
     });
     
     socket.on("partieTerminee", function(infos) {
+        console.log("Partie terminée");
+        console.log(local);
+        if(local) {
+            affichageFinPartieOffline(infos); // game_common.js, TODO : segmenter entre online et offline    
+        } else {
+            affichageFinPartieOnline(infos, joueur_actuel);
+        }
         
-        affichageFinPartie(infos, joueur_actuel); // game_common.js, TODO : segmenter entre online et offline
     });
     
     
