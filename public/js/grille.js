@@ -126,7 +126,8 @@ class Grille {
             }
         
         if(1+1 === 2) { // Condition préparant arrivée des options (si animations activées, on anime, sinon on efface et affiche uniquement), ici animation
-            this.appliquerAnimation(anc_case, nv_case, joueur_actuel);
+            let direction = this.calculDirection(anc_position, nv_position);
+            this.appliquerAnimation(anc_case, nv_case, joueur_actuel, direction);
             
         } else {
             
@@ -168,7 +169,7 @@ class Grille {
         this.grille = grid;
     }
     
-    appliquerAnimation(anc_case, nv_case, joueur_actuel) {
+    appliquerAnimation(anc_case, nv_case, joueur_actuel, direction) {
         
         if(!this.dimensionsJoueurs) { // Si on n'a pas les dimensions d'un joueur (normalement au premier tour), on les calcule et les stocke (pour que l'image qui se déplacera ait la même taille que l'image d'origine)
             this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
@@ -179,13 +180,13 @@ class Grille {
         
         let anc_position = this.calculPositionAnimation(anc_case),
             nv_position = this.calculPositionAnimation(nv_case),
-            $elem_animation = $(`<img src='/public/img/j_arme1.png' class="animation-deplacement joueur${joueur_actuel.id+1}-anim" />`),
+            $elem_animation = $(`<img src='/public/img/j_arme1.png' class="animation-deplacement joueur${joueur_actuel.id+1}-anim dir-${direction}" />`),
             image_joueur = $("<img></img>");
     
         
             
         image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
-        image_joueur.addClass("joueur"+ String(joueur_actuel.id+1)); // On applique la classe au joueur (permettant le changement de couleur)
+        image_joueur.addClass(`joueur${String(joueur_actuel.id+1)} dir-${direction}`); // On applique la classe au joueur (permettant le changement de couleur)
         
         $elem_animation.offset(anc_position);
         $elem_animation.css(this.dimensionsJoueurs); // On applique les dimensions à l'image
@@ -205,11 +206,25 @@ class Grille {
     calculPositionAnimation(case_jeu) { // Calcule la position de départ de l'image qu'on animera pour simuler le déplacement (besoin d'avoir le point central de l'image d'origine)
         let position = case_jeu.offset(),
             dimension_case = $("td").height();
-        console.log(position);
+
         position.left += ((dimension_case - this.dimensionsJoueurs.width) / 2); 
         position.top += ((dimension_case - this.dimensionsJoueurs.height) / 2);
-        console.log(position);
+
         return position;
+    }
+    
+    calculDirection(anc_position, nv_position) {
+        if(anc_position[0] > nv_position[0]) {
+            return "left";
+        } else if(anc_position[0] < nv_position[0]) {
+            return "right";
+        }
+        
+        if(anc_position[1] > nv_position[1]) {
+            return "up";
+        } else {
+            return "down";
+        }
     }
 
 

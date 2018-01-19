@@ -160,6 +160,18 @@ h1 {
 
 }
 
+.dir-down {
+    transform:rotate(90deg);
+}
+
+.dir-left {
+    transform:rotate(180deg);
+}
+
+.dir-up {
+    transform:rotate(-90deg);
+}
+
 span.vie, span.description-arme, span.degats {
 
     font-family:Typewriter, sans-serif;
