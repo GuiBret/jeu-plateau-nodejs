@@ -11,10 +11,7 @@ td {
 
 table {
 
-    border-collapse:collapse;
-    table-layout:fixed;
-    float:left;
-
+    /*border-collapse:collapse; Inutile ici, intégré dans Bootstrap*/
 }
 
 .grisee {
@@ -23,16 +20,12 @@ table {
     -webkit-filter:invert(100%);
 }
 
-
-
 .img_arme, .joueur1, .joueur2 {
 
     width:70%;
     height:70%;
 
 }
-
-
 
 .joueur1, .interface-joueur1 {
 
@@ -41,18 +34,12 @@ table {
 
 }
 
-
-
 .dep_possible {
 
     filter:invert(20%);
     -webkit-filter:invert(20%);
 
-
-
 }
-
-
 
 .dep_possible:hover {
 
@@ -64,17 +51,14 @@ table {
 
 
 #panel-interfaces {
-
-    display:none;
     border:1px solid black;
 }
-
-
 
 .espace_jeu {
 
     display:flex;
     justify-content:center;
+    margin-top:2rem;
 
 }
 
@@ -127,15 +111,12 @@ progress#barre_j2::-moz-progress-bar {
 }
 
 
-
 .img_interface_joueur {
 
     height:60px;
     width:80px;
-    float:left;
 
 }
-
 
 
 #interface_1, #interface_2 {
@@ -153,10 +134,7 @@ progress#barre_j2::-moz-progress-bar {
 h1 {
 
     display:none;
-
     text-align:center;
-
-
 
 }
 
@@ -182,21 +160,6 @@ span.vie, span.description-arme, span.degats {
 /* Affichage mobile */
 @media screen and (max-width:576px) {
 
-    td {
-        height:calc(100% / 11);
-        width:calc(100% / 11);
-    }
-
-    #grille {
-        height: 308px; /* Le temps de lui faire comprendre ça (ou en passant par jQuery, adapter height à la width)*/
-        padding-right:0;
-        padding-left:0;
-    }
-
-    table {
-        width:100%;
-    }
-
     .espace_jeu {
         margin-left:0;
         margin-right:0;
@@ -211,7 +174,7 @@ span.vie, span.description-arme, span.degats {
     }
 
     button {
-        font-size:12px;
+        font-size:.75rem;
     }
 
     #boutons_combat {
