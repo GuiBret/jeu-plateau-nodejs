@@ -34,31 +34,12 @@ class Grille {
 
                 if(case_actuelle === "1" || case_actuelle === "2") { // Ajout des images des joueurs
 
-                    var image_joueur = $("<img></img>"),
-                        nb_joueur = grille_back[x][y];
-
-
-                    image_joueur.attr("src", "/public/img/j_arme1.png");
-                    image_joueur.addClass("joueur"+ nb_joueur);
-                    case_jeu.append(image_joueur);
+                    this.appliquerImagePerso([x, y], case_jeu);
+                    
                     
                 } else if(armes.indexOf(case_actuelle) >= 0) { // Si on tombe sur une arme
-
+                    this.appliquerImageArme([x, y], case_jeu);
                     
-
-                    var nb_arme = case_actuelle.charCodeAt(0) - 63, // Donnera [65, 66, 67, 68] - 63 = 1, 2,3,4, permet de trouver facilement l'arme4
-                       img_arme = $("<img></img>");
-
-                    
-
-                    img_arme.attr("src", "/public/img/arme"+String(nb_arme-1)+".png");
-
-                    img_arme.addClass("img_arme");
-
-                    case_jeu.append(img_arme);
-
-                    
-
                 }
                 ligne.append(case_jeu);
             }
@@ -68,6 +49,25 @@ class Grille {
 
 
 
+    }
+    
+    appliquerImagePerso(coords, case_jeu) {
+        let x = coords[0],
+            y = coords[1],
+            nb_joueur = this.grille[x][y],
+            image_joueur = $(`<img src='/public/img/j_arme1.png' class='joueur${nb_joueur}' />`);
+        
+        case_jeu.append(image_joueur);
+        
+    }
+    
+    appliquerImageArme(coords, case_jeu) {
+        let x = coords[0],
+            y = coords[1],
+            nb_arme = this.grille[x][y].charCodeAt(0) - 63, // Donnera [65, 66, 67, 68] - 63 = 1, 2,3,4, permet de trouver facilement l'arme
+            image_arme = $(`<img src='/public/img/arme${String(nb_arme-1)}.png' class="img_arme" />`);
+        
+        case_jeu.append(image_arme);
     }
     
     afficherDepDispos(dep_dispos, _callback) { // Fonction ajoutant les déplacements possibles sur la grille à l'écran, callback : deplacerJoueur (main.js)
