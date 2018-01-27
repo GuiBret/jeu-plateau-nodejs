@@ -18,9 +18,21 @@ class SoundManager {
             },
             "STEPS": {
                 "link": "/public/sound/steps.wav"
+            },
+            "WIN": {
+                "link": "/public/sound/win.wav"
+            },
+            "LOSE": {
+                "link": "/public/sound/lose.wav"
             }
         }
     
+    }
+    
+    playSound(arr_sounds) { // FUnction used for generic uses, sounds played once (ex : not the steps, which have to be repeated)
+         let sound = this.createSound(arr_sounds);
+        sound.play();
+        
     }
     
     createSound(arr_sounds) {
@@ -40,6 +52,12 @@ class SoundManager {
         return arr_sound_links;
     }
     
+    
+    
+    searchSound(sound_id) { // Searches through this.sounds and returns the link, used by searchSoundList
+        return this.sounds[sound_id].link;
+    }
+    
     createStepsSound() {
         let soundList = this.createSoundList(["STEPS"]);
         
@@ -47,7 +65,13 @@ class SoundManager {
         
     }
     
-    searchSound(sound_id) { // Searches through this.sounds and returns the link, used by searchSoundList
-        return this.sounds[sound_id].link;
+    createWinSound() {
+        let soundList = this.createSoundList(["WIN"]);
+        return new Howl({src: soundList, volume:.3});
+    }
+    
+    createLossSound() {
+        let soundList = this.createSoundList(["LOSE"]);
+        return new Howl({src: soundList, volume:.3});
     }
 }

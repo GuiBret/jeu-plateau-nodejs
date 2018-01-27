@@ -13,12 +13,14 @@ function resizeGrid() {
         }
 }
 
-function affichageFinPartieOnline(infos, joueur_actuel) {
+function affichageFinPartieOnline(infos, joueur_actuel, sm) {
     let dialog_text;
 
         if(infos["winner"] === joueur_actuel.nom) {
+            sm.playSound(["WIN"]);
             dialog_text = {"title": "Victoire ! " , "content": `Vous avez gagné en ${infos["turns"]} tours !`};
         } else {
+            sm.playSound(["LOSE"]);
             dialog_text = {"title": "Défaite...", "content": `Vous avez perdu contre ${infos["winner"]} en ${infos["turns"]} tours...`};
         }
     

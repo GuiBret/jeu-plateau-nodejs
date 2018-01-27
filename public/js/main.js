@@ -196,9 +196,10 @@ $(document).ready(function () {
         console.log("Partie terminée");
         console.log(local);
         if(local) {
-            affichageFinPartieOffline(infos); // game_common.js, TODO : segmenter entre online et offline    
+            affichageFinPartieOffline(infos); 
         } else {
-            affichageFinPartieOnline(infos, joueur_actuel);
+            
+            affichageFinPartieOnline(infos, joueur_actuel, sm);
         }
         
     });
