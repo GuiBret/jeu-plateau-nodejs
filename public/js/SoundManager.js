@@ -15,24 +15,19 @@ class SoundManager {
             },
             "DEFENSE": {
                 "link": "/public/sound/impact.wav"
+            },
+            "STEPS": {
+                "link": "/public/sound/steps.wav"
             }
         }
     
-    }
-    
-    playSound(arr_sounds) {
-        let sound = this.createSound(arr_sounds);
-        console.log(sound);
-        sound.play();
-        
-        
     }
     
     createSound(arr_sounds) {
         
         let soundList = this.createSoundList(arr_sounds);
         
-        return new Howl({src: soundList, volume:.3})
+        return new Howl({src: soundList, volume:.3});
     }
     
     createSoundList(arr_sounds) { // Creates the sound list which will be used to generate the Howl in createSound
@@ -43,6 +38,13 @@ class SoundManager {
         }
         
         return arr_sound_links;
+    }
+    
+    createStepsSound() {
+        let soundList = this.createSoundList(["STEPS"]);
+        
+        return new Howl({src: soundList, volume:.3, loop:true});
+        
     }
     
     searchSound(sound_id) { // Searches through this.sounds and returns the link, used by searchSoundList

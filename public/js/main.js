@@ -76,7 +76,7 @@ $(document).ready(function () {
         
         socket.emit("envoiNomJoueur", {"nom": nom_joueur, "id": id_joueur, "online_id": online_id}); // On envoie le nom du joueur, et son ID ici (pour faciliter le stockage)
         
-        grille = new Grille(params["grid"]);
+        grille = new Grille(params["grid"], sm);
         
         joueur_actuel = joueurs[id_joueur];
         
@@ -100,7 +100,7 @@ $(document).ready(function () {
     
     socket.on("envoiGrille", function(params) {
 
-        grille = new Grille(params["grille"]);
+        grille = new Grille(params["grille"], sm);
         
         resizeGrid();
         socket.emit("gridCreated"); // On dit au serveur que la grille est créée, ce qui lance la partie

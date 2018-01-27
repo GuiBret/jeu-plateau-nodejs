@@ -1,8 +1,9 @@
 /* Classe grille frontend : contient toutes les fonctions d'affichage de la carte (les fonctions de calcul sont réalisées par le serveur */
 
 class Grille {
-    constructor(grid_content) {
+    constructor(grid_content, sm) {
         this.grille = grid_content;
+        this.sm = sm; // SoundManager
         this.genGrilleEcran();
         this.dimensionsJoueurs; // Pour animations
     }
@@ -171,6 +172,7 @@ class Grille {
     
     appliquerAnimation(anc_case, nv_case, joueur_actuel, direction) {
         
+        
         if(!this.dimensionsJoueurs) { // Si on n'a pas les dimensions d'un joueur (normalement au premier tour), on les calcule et les stocke (pour que l'image qui se déplacera ait la même taille que l'image d'origine)
             this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
         
@@ -192,9 +194,11 @@ class Grille {
         $elem_animation.css(this.dimensionsJoueurs); // On applique les dimensions à l'image
         
         $("body").append($elem_animation);
-        
-        $elem_animation.animate({left: nv_position.left, top:nv_position.top}, 400, () => {
-            
+        let sound = this.sm.createStepsSound();
+        sound.rate(1.25);
+        sound.play();
+        $elem_animation.animate({left: nv_position.left, top:nv_position.top}, 800, () => {
+            sound.fade(.3, 0, 200);
             // Quand l'animation est finie, on affiche l'image de la nouvelle position et on supprime l'animation 
             nv_case.html(image_joueur);
             
