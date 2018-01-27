@@ -10,7 +10,6 @@ let express = require('express'),
     gh = new GameHub(),
     GameSearchSocketManager = require("./node_modules/jeu-backend/managers/GameSearchSocketManager"),
     GameSocketManager = require("./node_modules/jeu-backend/managers/GameSocketManager");
-    
 
 app.set("view engine", "ejs");
 
