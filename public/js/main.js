@@ -110,6 +110,7 @@ $(document).ready(function () {
     
     socket.on("lancementTour", function(infos) { // Param joueur : ID du joueur auquel c'est le tour
         resetPlayerPositions(); // On réétablit la position des joueurs
+        console.log(infos);
           
         if(!local && infos["joueur_actuel"] === id_joueur || local) { // On vérifie si c'est à ce joueur de faire son tour ou si on est en local pour lui laisser se déplacer
 
@@ -142,12 +143,14 @@ $(document).ready(function () {
                 
                 if(id_joueur === cur_player.id) { // If the local player got a new weapon
                     joueur_actuel.updateArme(arme);
+                    interface_jeu.updateArme(joueur_actuel);   
                      
                 } else { // If the remote player got a new weapon
-                    playerToUpdate.updateArme(cur_player.arme.id);
+                    playerToUpdate.updateArme(arme);
+                    interface_jeu.updateArme(playerToUpdate);   
                 }
                 
-                interface_jeu.updateArme(joueur_actuel);   
+                
                 
             }
             
@@ -185,7 +188,17 @@ $(document).ready(function () {
     socket.on("resultatDecision", function(infosDegats) {
 
         let id = infosDegats["id"],
-            vie_restante = infosDegats["remaining_hp"];
+            vie_restante = infosDegats["remaining_hp"],
+            arme = infosDegats["arme"],
+            posture = infosDegats["posture"];
+        
+        let soundList = [`WEAPON${arme}`];
+        
+        if (!posture)  
+            soundList.push("DEFENSE"); // If the player receiving was in defensive position, we also play the defense sound
+
+        console.log(soundList);
+        sm.playSound(soundList);
         
         interface_jeu.updateInterfaceCombat(id, vie_restante, function() {
             socket.emit("newTurn");
@@ -193,17 +206,13 @@ $(document).ready(function () {
     });
     
     socket.on("partieTerminee", function(infos) {
-        console.log("Partie terminée");
-        console.log(local);
+
         if(local) {
             affichageFinPartieOffline(infos); 
         } else {
-            
             affichageFinPartieOnline(infos, joueur_actuel, sm);
         }
-        
     });
-    
     
     socket.on("lancementTourCombat", function(params) {
         
@@ -215,9 +224,7 @@ $(document).ready(function () {
 
             $("#btn_attaque, #btn_defense").on("click", gestionCombat);
         }
-    
     });
-    
 });
 
 
