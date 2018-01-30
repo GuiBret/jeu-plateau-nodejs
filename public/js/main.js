@@ -132,7 +132,7 @@ $(document).ready(function () {
         grille.updateGrille(nv_grille); // Réétablit la grille telle que modifiée sur le serveur
 
         if (typeof arme === "number" && arme !== -1) { // If one of the players stepped on a new weapon
-            gestionNouvelleArme(cur_player);
+            gestionNouvelleArme(cur_player, arme);
         }
         
         let armeTourPrecedent;
@@ -243,7 +243,7 @@ $(document).ready(function () {
 
     function gestionCombat(e) { // Fonction callback de gestionTour en cas de combat
 
-            gestionCombatFront(); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
+            gestionCombatFront(this); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
 
             var decision = e.target.id.replace("btn_", "");
 
@@ -251,7 +251,7 @@ $(document).ready(function () {
 
     }
     
-    function gestionNouvelleArme(cur_player) {
+    function gestionNouvelleArme(cur_player, arme) {
         
         if(local) { // Offline
             joueur_actuel.updateArme(arme);

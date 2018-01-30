@@ -247,7 +247,7 @@ describe("requestMovement", function() {
                     
                     this.gsm.requestMovement(new_position).then(() => {
                         
-                        expect(this.gsm.socket.emit).toHaveBeenCalledWith("confirmationDeplacement", {"position": new_position, "prev_position": position, "id_arme":-1, grille:game.getCurrentGrid() });
+                        expect(this.gsm.socket.emit).toHaveBeenCalledWith("confirmationDeplacement", {"position": new_position, "prev_position": position, "id_arme":-1, grille:game.getCurrentGrid(), cur_player: jasmine.any(Object) });
                     
                         done();             
                         

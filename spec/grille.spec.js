@@ -1,10 +1,6 @@
 const Grille = require("../node_modules/jeu-backend/grille"),
       Joueur = require("../node_modules/jeu-backend/joueur");
 
-describe("grid class creation", function () {
-    
-});
-
 describe("grid generation", function() {
     var grille = new Grille(new Joueur(0, "Joueur 1"), new Joueur(1, "Joueur 2")); // Grid created in the constructor
     
