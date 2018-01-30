@@ -20,6 +20,7 @@ $(document).ready(function () {
     "use strict";
     
     let gameID = new URL(window.location.href).searchParams.get("id");
+    
     socket.emit("inscriptionRoom", gameID); // On inscrit le client à sa room pour faciliter les communcations
     
     local = isLocal();
@@ -110,7 +111,6 @@ $(document).ready(function () {
     
     socket.on("lancementTour", function(infos) { // Param joueur : ID du joueur auquel c'est le tour
         resetPlayerPositions(); // On réétablit la position des joueurs
-        console.log(infos);
           
         if(!local && infos["joueur_actuel"] === id_joueur || local) { // On vérifie si c'est à ce joueur de faire son tour ou si on est en local pour lui laisser se déplacer
 
@@ -131,36 +131,15 @@ $(document).ready(function () {
         
         grille.updateGrille(nv_grille); // Réétablit la grille telle que modifiée sur le serveur
 
-        if (typeof arme === "number" && arme !== -1) { // Si le joueur tombe sur une nouvelle arme
-            
-            if(local) { // Offline
-                
-                joueur_actuel.updateArme(arme);
-                interface_jeu.updateArme(joueur_actuel);
-
-            } else { // Online
-                let playerToUpdate = (id_joueur === cur_player.id ) ? joueur_actuel : getEnemy();
-                
-                if(id_joueur === cur_player.id) { // If the local player got a new weapon
-                    joueur_actuel.updateArme(arme);
-                    interface_jeu.updateArme(joueur_actuel);   
-                     
-                } else { // If the remote player got a new weapon
-                    playerToUpdate.updateArme(arme);
-                    interface_jeu.updateArme(playerToUpdate);   
-                }
-                
-                
-                
-            }
-            
+        if (typeof arme === "number" && arme !== -1) { // If one of the players stepped on a new weapon
+            gestionNouvelleArme(cur_player);
         }
         
         let armeTourPrecedent;
         
         if(arme instanceof Array) { // Si le joueur était passé sur une arme, on aura dans arme[0] l'id de l'arme à poser
                 armeTourPrecedent = arme[0];
-            }
+        }
 
         if(!local) { // Online
             
@@ -190,14 +169,12 @@ $(document).ready(function () {
         let id = infosDegats["id"],
             vie_restante = infosDegats["remaining_hp"],
             arme = infosDegats["arme"],
-            posture = infosDegats["posture"];
-        
-        let soundList = [`WEAPON${arme}`];
+            posture = infosDegats["posture"],
+            soundList = [`WEAPON${arme}`];
         
         if (!posture)  
-            soundList.push("DEFENSE"); // If the player receiving was in defensive position, we also play the defense sound
+            soundList.push("DEFENSE"); // If the player receiving damage was in defensive position, we also play the defense sound
 
-        console.log(soundList);
         sm.playSound(soundList);
         
         interface_jeu.updateInterfaceCombat(id, vie_restante, function() {
@@ -225,15 +202,12 @@ $(document).ready(function () {
             $("#btn_attaque, #btn_defense").on("click", gestionCombat);
         }
     });
-});
-
-
-/* 
+    
+    /* 
     
     FONCTIONS
         
-*/
-    
+    */
     
     function gestionTour(id_joueur_actuel, dep_possibles, anc_arme) {
         
@@ -267,12 +241,34 @@ $(document).ready(function () {
     
     }
 
-function gestionCombat(e) { // Fonction callback de gestionTour en cas de combat
+    function gestionCombat(e) { // Fonction callback de gestionTour en cas de combat
 
-        gestionCombatFront(); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
+            gestionCombatFront(); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
 
-        var decision = e.target.id.replace("btn_", "");
+            var decision = e.target.id.replace("btn_", "");
 
-        socket.emit("decisionJoueur", decision);
+            socket.emit("decisionJoueur", decision);
 
-}
+    }
+    
+    function gestionNouvelleArme(cur_player) {
+        
+        if(local) { // Offline
+            joueur_actuel.updateArme(arme);
+            interface_jeu.updateArme(joueur_actuel);
+
+        } else { // Online
+            let playerToUpdate = (id_joueur === cur_player.id ) ? joueur_actuel : getEnemy();
+                
+        
+            if(id_joueur === cur_player.id) { // If the local player got a new weapon
+                joueur_actuel.updateArme(arme);
+                interface_jeu.updateArme(joueur_actuel);   
+                     
+            } else { // If the remote player got a new weapon
+                playerToUpdate.updateArme(arme);
+                interface_jeu.updateArme(playerToUpdate);   
+            }       
+        }
+    }
+});

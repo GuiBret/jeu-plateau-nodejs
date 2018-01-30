@@ -50,6 +50,7 @@ $("document").ready(function() {
 
 function verifClientConnecte() {
     if(!sessionStorage.getItem("username")) {
+        /*
         let dialog_text = {"title": "Vous n'êtes pas connecté", "content": "Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion"};
         
         let $dialog = $(`<div id="user-not-connected" title="${dialog_text.title}">${dialog_text.content}</div>`);
@@ -64,6 +65,26 @@ function verifClientConnecte() {
                 }
             }
         })
+        
+        */
+        let info = {"title": "pas de connexion",
+                    "content": "Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion"}
+        createModalDialog(info, function() { window.location.replace("../"); });
+        /*
+        let dialog = document.createElement("dialog");
+        
+        dialog.classList = "md1-dialog";
+        
+        dialog.innerHTML = `<h4 class='md1-dialog__title text-center'>vous n'etes pas connecté</h4><div class='md1-dialog__content'><p>Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion</p></div><div class="md1-dialog__actions"><button type='button' class='md1-button back'>OK</button></div>`;
+        
+        document.body.appendChild(dialog);
+        
+        $("button.back").on("click", function() {
+           window.location.replace("../"); 
+        });
+        dialog.showModal();
+        
+        */
     }
 }
 
