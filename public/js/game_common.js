@@ -38,22 +38,8 @@ function affichageFinPartieOffline(infos) {
 } 
 
 function afficherDialogFinPartie(dialog_text) {
-    let $dialog = $(`<div id="endgame_dialog" title="${dialog_text["title"]}">${dialog_text["content"]}</div>`);
-    
-    $dialog.dialog({
-            modal:true,
-            buttons: {
-                Ok: function() {
-                    
-                    $(this).dialog("close");
-                        
-                    window.location.replace("../menu/"); // On redirige le joueur vers le menu principal
-                    }
-            
-            }
-        });
-    
-    
+    createModalDialog(dialog_text, function() { window.location.replace("../menu/")});
+        
 }
 /* Fonctions utilitaires */
 

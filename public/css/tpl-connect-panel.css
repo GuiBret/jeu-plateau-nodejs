@@ -9,6 +9,14 @@
     margin-top:-15%; 
 }
 
+#connect-button, #guest-button {
+    background-color:green
+}
+
+#connect-button:hover, #guest-button:hover {
+    background-color:green;
+}
+
 @media screen and (max-device-width: 420px) {
     #page {
         top:10%;
