@@ -7,13 +7,12 @@ var socket = io.connect((window.location.hostname === "localhost") ? "http://loc
     game_id,
     grille,
     joueurs,
-    combat = false,
     joueur_actuel,
     interface_jeu,
     id_joueur,
     nom_joueur, // Variable provisoire (utilisée uniquement en online) servant à stocker le nom du joueur le temps qu'on récupère celui de l'ennemi
     tour_lance = false,
-    local; // Booléan, self-explanatory 
+    local = isLocal(); // Boolean, self-explanatory, function defined in game_common.js
 
 $(document).ready(function () {
 
@@ -23,12 +22,9 @@ $(document).ready(function () {
     
     socket.emit("inscriptionRoom", gameID); // On inscrit le client à sa room pour faciliter les communcations
     
-    local = isLocal();
-    
     $(window).resize(resizeGrid); // Si la fenêtre est resizée, on redimensionnera la grille (fait au chargement de la grille pour les petits écrans de toute façon)
         
-    
-    
+
     if(!local) { // Partie online
         
         if(sessionStorage.getItem("username")) { // If the user is connected, we take his username
@@ -82,9 +78,8 @@ $(document).ready(function () {
         joueur_actuel = joueurs[id_joueur];
         
         resizeGrid();
+        
         socket.emit("gridCreated");
-        
-        
     });
     
     socket.on("envoiNomVersClient", function(params) {
@@ -96,23 +91,18 @@ $(document).ready(function () {
         }
     });
     
-    
-    
-    
     socket.on("envoiGrille", function(params) {
 
         grille = new Grille(params["grille"], sm);
         
         resizeGrid();
         socket.emit("gridCreated"); // On dit au serveur que la grille est créée, ce qui lance la partie
-        
-        
     });
     
     socket.on("lancementTour", function(infos) { // Param joueur : ID du joueur auquel c'est le tour
         resetPlayerPositions(); // On réétablit la position des joueurs
           
-        if(!local && infos["joueur_actuel"] === id_joueur || local) { // On vérifie si c'est à ce joueur de faire son tour ou si on est en local pour lui laisser se déplacer
+        if(!local && infos["joueur_actuel"] === id_joueur || local) { // On vérifie si c'est à ce joueur de faire son tour ou si on est en local pour le laisser se déplacer
 
             gestionTour(infos["joueur_actuel"], infos["dep_possibles"], infos["ancienne_arme"]);   
             
@@ -129,7 +119,10 @@ $(document).ready(function () {
             prev_position = infos["prev_position"],
             arme_posee;
         
+        
         grille.updateGrille(nv_grille); // Réétablit la grille telle que modifiée sur le serveur
+        
+        weaponManagement(arme); // Performs actions considering the variable "arme" (if an array => the player got a new weapon at the previous turn, we have to put the previous one at its position, number && != -1 : he just got a new weapon)
 
         if (typeof arme === "number" && arme !== -1) { // If one of the players stepped on a new weapon
             gestionNouvelleArme(cur_player, arme);
@@ -145,19 +138,19 @@ $(document).ready(function () {
             
             if(id_joueur === cur_player.id) { // Si c'est au joueur local de jouer
                 
-                arme_posee = grille.updateGrilleEcran(nv_position, arme, prev_position, joueur_actuel, armeTourPrecedent); // On remet à jour la grille front    
+                arme_posee = grille.updateGrilleEcran(nv_position, prev_position, joueur_actuel, armeTourPrecedent); // On remet à jour la grille front    
                 
                 if(arme_posee) {
                     joueur_actuel.ancienne_arme = -1;
                 }
-            } else { // Si on est sur l'autre joueur
+            } else { // Si c'est au joueur distant de jouer
 
-                arme_posee = grille.updateGrilleEcran(nv_position, arme, prev_position, cur_player, armeTourPrecedent);
+                arme_posee = grille.updateGrilleEcran(nv_position, prev_position, cur_player, armeTourPrecedent);
             }
             
-        } else {
+        } else { // Offline
 
-            arme_posee = grille.updateGrilleEcran(nv_position, arme, prev_position, joueur_actuel, armeTourPrecedent); // On remet à jour la grille front    
+            arme_posee = grille.updateGrilleEcran(nv_position, prev_position, joueur_actuel, armeTourPrecedent); // On remet à jour la grille front    
             joueur_actuel.position = nv_position; // On met la position du joueur à jour côté client
         }
         
@@ -219,8 +212,6 @@ $(document).ready(function () {
         
         let position = joueur_actuel.position;
         grille.afficherDepDispos(dep_possibles, deplacerJoueur);
-        
-
     }
     
     function deplacerJoueur(e) {
@@ -260,7 +251,6 @@ $(document).ready(function () {
         } else { // Online
             let playerToUpdate = (id_joueur === cur_player.id ) ? joueur_actuel : getEnemy();
                 
-        
             if(id_joueur === cur_player.id) { // If the local player got a new weapon
                 joueur_actuel.updateArme(arme);
                 interface_jeu.updateArme(joueur_actuel);   

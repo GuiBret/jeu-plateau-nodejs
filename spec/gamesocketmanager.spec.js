@@ -33,19 +33,6 @@ describe("enterRoom", function() {
         
     });
     // Requiert un vrai socket
-    /*
-   it("should make the user enter the room", function(done) { // ???
-       spyOn(this.gsm.socket, "emit").and.callThrough();
-       this.gsm.enterRoom(this.game_id);
-
-       expect(this.gsm.io.of(`room-${this.game_id}`).clients((err, clients) => {
-           
-           expect(clients.length).toEqual(0);
-           
-           done();
-       }));
-   });
-   */
     
     it("should have triggered the join function", function(done) {
         spyOn(this.gsm.socket, "join");
@@ -63,6 +50,7 @@ describe("enterRoom", function() {
         done();
     })
 });
+
 /* PBs online tests : requiert 2 sockets + vrais sockets */
 describe("onlineGameConfirmation", function() {
     
@@ -246,7 +234,6 @@ describe("requestMovement", function() {
                     
                     
                     this.gsm.requestMovement(new_position).then(() => {
-                        
                         expect(this.gsm.socket.emit).toHaveBeenCalledWith("confirmationDeplacement", {"position": new_position, "prev_position": position, "id_arme":-1, grille:game.getCurrentGrid(), cur_player: jasmine.any(Object) });
                     
                         done();             

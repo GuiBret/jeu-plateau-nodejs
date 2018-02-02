@@ -16,17 +16,15 @@ function resizeGrid() {
 function affichageFinPartieOnline(infos, joueur_actuel, sm) {
     let dialog_text;
 
-        if(infos["winner"] === joueur_actuel.nom) {
-            sm.playSound(["WIN"]);
-            dialog_text = {"title": "Victoire ! " , "content": `Vous avez gagné en ${infos["turns"]} tours !`};
-        } else {
-            sm.playSound(["LOSE"]);
-            dialog_text = {"title": "Défaite...", "content": `Vous avez perdu contre ${infos["winner"]} en ${infos["turns"]} tours...`};
-        }
+    if(infos["winner"] === joueur_actuel.nom) {
+        sm.playSound(["WIN"]);
+        dialog_text = {"title": "Victoire ! " , "content": `Vous avez gagné en ${infos["turns"]} tours !`};
+    } else {
+        sm.playSound(["LOSE"]);
+        dialog_text = {"title": "Défaite...", "content": `Vous avez perdu contre ${infos["winner"]} en ${infos["turns"]} tours...`};
+    }
     
-        afficherDialogFinPartie(dialog_text);
-        
-        
+    afficherDialogFinPartie(dialog_text); 
 }
 
 function affichageFinPartieOffline(infos) {
@@ -43,9 +41,8 @@ function afficherDialogFinPartie(dialog_text) {
 }
 /* Fonctions utilitaires */
 
-function isLocal() { // utility functions which checks if the game is a local or online one according to the url
+function isLocal() { 
         return window.location.pathname.split("/").pop() === "local"; 
-    
 }
 
 function getEnemy() {
@@ -64,5 +61,9 @@ function gestionCombatFront(callback) {
     $("#boutons_combat").slideToggle(200, function() { 
             this.remove();
     });
+}
+
+function weaponManagement(weapon) {
+    
 }
 

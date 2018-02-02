@@ -99,20 +99,15 @@ class Grille {
 
     }
     
-    updateGrilleEcran(nv_position, arme, anc_position, joueur_actuel, armeTourPrecedent) {
-
+    updateGrilleEcran(nv_position, anc_position, joueur_actuel, armeTourPrecedent) {
+        
         var image_joueur = $("<img></img>"),
                  anc_case = $("#"+anc_position.join("-")),
                  nv_case = $("#"+ nv_position.join("-")),
                  arme_posee = false;
             
-            anc_case.html(""); // On efface la case actuelle
+            anc_case.html(""); // On efface le contenu de la case actuelle
         
-        
-
-            var anc_case_back = this.grille[anc_position[0]][anc_position[1]];
-
-
             if(typeof armeTourPrecedent !== "undefined") { // Si le joueur avait ramassé une arme au tour précédent
  
                 var img_arme = $("<img class='img_arme'></img>");
@@ -121,8 +116,6 @@ class Grille {
 
                 anc_case.html(img_arme);  
 
-                
-                //joueur_actuel.ancienne_arme = -1;
                 arme_posee = true; // Signale au serveur qu'on a posé une arme au tour précédent (lui dit de reset joueur_actuel.ancienne_arme);
             }
         
@@ -134,17 +127,10 @@ class Grille {
             
             nv_case.html(image_joueur); // On applique l'image à la nouvelle case
         }
-            
-        
-
-        
 
         $(".dep_possible").removeClass("dep_possible"); // On efface les déplacements possibles
         
         return arme_posee;
-
-
-   
             
     }
     
@@ -158,7 +144,8 @@ class Grille {
     getPosJoueur(joueur_actuel) {
         for(let y = 0; y < 11; y++) {
             for(let x = 0; x < 11; x++) {
-                if(parseInt(this.grille[x][y]) === joueur_actuel ) {
+                console.time()
+                if(this.grille[x][y] == joueur_actuel ) {
                     return [x, y];
                 }
             }
@@ -172,21 +159,16 @@ class Grille {
     
     appliquerAnimation(anc_case, nv_case, joueur_actuel, direction) {
         
-        
         if(!this.dimensionsJoueurs) { // Si on n'a pas les dimensions d'un joueur (normalement au premier tour), on les calcule et les stocke (pour que l'image qui se déplacera ait la même taille que l'image d'origine)
             this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
         
         }
         
-        
-        
         let anc_position = this.calculPositionAnimation(anc_case),
             nv_position = this.calculPositionAnimation(nv_case),
             $elem_animation = $(`<img src='/public/img/j_arme1.png' class="animation-deplacement joueur${joueur_actuel.id+1}-anim dir-${direction}" />`),
             image_joueur = $("<img></img>");
-    
-        
-            
+     
         image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
         image_joueur.addClass(`joueur${String(joueur_actuel.id+1)} dir-${direction}`); // On applique la classe au joueur (permettant le changement de couleur)
         
