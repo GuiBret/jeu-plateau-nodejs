@@ -122,4 +122,16 @@ describe("match data", function() {
     
 });
 
+describe("getOptions", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+    });
+    
+    it("should able to get the options (set as default) for the first test user", function() {
+        this.db_connection.getOptions(1).then((res) => {
+            expect(res.volume).toEqual(.5);
+            done();
+        })
+    })
+});
 
