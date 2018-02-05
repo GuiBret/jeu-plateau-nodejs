@@ -12,6 +12,7 @@ let express = require('express'),
     GameSocketManager = require("./node_modules/jeu-backend/managers/GameSocketManager");
 
 app.set("view engine", "ejs");
+app.use(express.json());
 
 let RequestManager = require("./node_modules/jeu-backend/managers/RequestManager.js"),
     rm = new RequestManager(app, DBConnection);
