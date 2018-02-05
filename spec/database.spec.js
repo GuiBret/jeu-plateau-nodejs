@@ -127,7 +127,7 @@ describe("getOptions", function() {
         this.db_connection = new DatabaseConnection();
     });
     
-    it("should able to get the options (set as default) for the first test user", function() {
+    it("should able to get the options (set as default) for the first test user", function(done) {
         this.db_connection.getOptions(1).then((res) => {
             expect(res.volume).toEqual(.5);
             done();

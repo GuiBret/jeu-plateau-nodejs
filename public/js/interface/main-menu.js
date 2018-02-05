@@ -4,8 +4,13 @@ $("document").ready(function() {
     
     verifClientConnecte(); // On vérifie si le client est connecté normalement ou en tant qu'invité, si aucun des deux, on affiche un dialog et le redirige vers la page de connexion
     
+    /* Button tooltips requiring connection */
+    $("#btn-options, #btn-profile").on("mouseover", function() {
+        //alert("Hover");
+        $(this).tooltip();
+    })
     
-    
+    $("#btn-profile").tooltip();
     let username = sessionStorage.getItem("username");
     $("#username_label").html(username);
     
@@ -35,6 +40,8 @@ $("document").ready(function() {
                
             break;
             case "btn-options": // Bouton des options
+               alert(`../options/${sessionStorage.getItem("id")}`)
+               window.location.replace(`../options/${sessionStorage.getItem("id")}`);
             break;
            case "btn-profile":
                 window.location.replace(`../profile/${sessionStorage.getItem("id")}`);
@@ -50,45 +57,15 @@ $("document").ready(function() {
 
 function verifClientConnecte() {
     if(!sessionStorage.getItem("username")) {
-        /*
-        let dialog_text = {"title": "Vous n'êtes pas connecté", "content": "Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion"};
-        
-        let $dialog = $(`<div id="user-not-connected" title="${dialog_text.title}">${dialog_text.content}</div>`);
-        
-        $dialog.dialog({
-            modal:true,
-            buttons: {
-                Ok: function() {
-                    $(this).dialog("close");
-                    
-                    window.location.replace("../");
-                }
-            }
-        })
-        
-        */
+
         let info = {"title": "pas de connexion",
                     "content": "Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion"}
         createModalDialog(info, function() { window.location.replace("../"); });
-        /*
-        let dialog = document.createElement("dialog");
-        
-        dialog.classList = "md1-dialog";
-        
-        dialog.innerHTML = `<h4 class='md1-dialog__title text-center'>vous n'etes pas connecté</h4><div class='md1-dialog__content'><p>Vous êtes sur la page d'accueil du jeu, mais vous n'êtes pas connecté. Vous allez automatiquement être redirigé vers la page de connexion</p></div><div class="md1-dialog__actions"><button type='button' class='md1-button back'>OK</button></div>`;
-        
-        document.body.appendChild(dialog);
-        
-        $("button.back").on("click", function() {
-           window.location.replace("../"); 
-        });
-        dialog.showModal();
-        
-        */
+
     }
 }
 
-
+/* In case of a disconnection, we remove all session storage items and redirect the user back to the connection page */
 function handleDisconnect() {
     sessionStorage.removeItem("id");
     sessionStorage.removeItem("username");

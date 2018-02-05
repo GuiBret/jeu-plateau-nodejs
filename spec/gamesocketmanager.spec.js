@@ -32,7 +32,6 @@ describe("enterRoom", function() {
         
         
     });
-    // Requiert un vrai socket
     
     it("should have triggered the join function", function(done) {
         spyOn(this.gsm.socket, "join");
@@ -51,7 +50,7 @@ describe("enterRoom", function() {
     })
 });
 
-/* PBs online tests : requiert 2 sockets + vrais sockets */
+/* PBs online tests : requires 2 real sockets */
 describe("onlineGameConfirmation", function() {
     
 });
