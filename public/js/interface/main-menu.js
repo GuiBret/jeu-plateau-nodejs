@@ -6,7 +6,6 @@ $("document").ready(function() {
     
     /* Button tooltips requiring connection */
     $("#btn-options, #btn-profile").on("mouseover", function() {
-        //alert("Hover");
         $(this).tooltip();
     })
     
@@ -14,9 +13,7 @@ $("document").ready(function() {
     let username = sessionStorage.getItem("username");
     $("#username_label").html(username);
     
-    
-    
-    /* Gestion clic boutons */
+    /* Button click management*/
     $(".button_container button").on("click", function(e) { // Listener unique pour tous les boutons, un switch dans le callback pour savoir quel bouton a été cliqué
 
        switch($(e.target).attr('id')) {
@@ -40,11 +37,10 @@ $("document").ready(function() {
                
             break;
             case "btn-options": // Bouton des options
-               alert(`../options/${sessionStorage.getItem("id")}`)
-               window.location.replace(`../options/${sessionStorage.getItem("id")}`);
+               window.location.replace(`../options/${sessionStorage.getItem("id")}/`);
             break;
            case "btn-profile":
-                window.location.replace(`../profile/${sessionStorage.getItem("id")}`);
+                window.location.replace(`../profile/${sessionStorage.getItem("id")}/`);
             break;
            case "btn-disconnect":
                 handleDisconnect();

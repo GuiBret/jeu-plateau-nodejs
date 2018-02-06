@@ -34,12 +34,5 @@ describe("Profile info", function() {
            expect(this.results.ai_wins).toEqual(0);
        })
        
-       
-   
-    
-    
-    
-
-    
     
 });

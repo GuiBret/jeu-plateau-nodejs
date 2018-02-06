@@ -135,3 +135,61 @@ describe("getOptions", function() {
     })
 });
 
+
+/* We won't test the fact that a non-existing user has tried to modify its options, because we will have blocked it upstream */
+
+describe("setOptions", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+    });
+    
+    it("should be able to correctly modify the specified user's options", function(done) {
+       this.db_connection.setOptions({"joueur_concerne": 1, "volume": 0.7, "animations": 0}).then(() => { // Then, after we've modified the options, we check if they have been updated in the database
+           this.db_connection.getOptions(1).then((options) => {
+               expect(options.animations).toEqual(0);
+               expect(options.volume).toEqual(0.7);
+               
+               done();
+           });
+       });
+    });
+    
+    afterAll(function(done) {
+        this.db_connection.setOptions({"joueur_concerne": 1, "volume": .5, "animations": 1}).then(() => {
+            done();
+        })
+    })
+});
+
+describe("createOptions", function() {
+   beforeAll(function(done) { // First, we have to create a new user (which will be deleted in the afterAll)
+       this.db_connection = new DatabaseConnection();
+       
+       this.db_connection.createUser({"username": "utilisateurdetest", "password": "monutilisateurdetest"}).then((userInfo) => {
+           this.user_id = userInfo.id; // Needed as a parameter of the createOptions function
+           done();
+           
+       });
+   });
+    
+    it("should correctly insert the options of a newly-created user", function(done) {
+        this.db_connection.createOptions(this.user_id).then(() => {
+            // Then, we check the options of this user
+            this.db_connection.getOptions(this.user_id).then((options) => {
+                expect(options.joueur_concerne).toEqual(this.user_id);
+                done();
+            })
+             
+        });
+        
+        
+    });
+    
+    
+    afterAll(function() {
+        this.db_connection.removeLastOptions("utilisateurdetest");
+        this.db_connection.removeUser("utilisateurdetest");
+        
+    })
+});
+

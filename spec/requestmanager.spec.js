@@ -1,5 +1,6 @@
 const RequestManager = require("../node_modules/jeu-backend/managers/RequestManager.js"),
-      express = require("express");
+      express = require("express"),
+      DBConnection = require("../node_modules/jeu-backend/utils/database_connection.js");
 
 describe("Routing behavior (get ...)", function() {
     beforeEach(function() { // Creating fake req and res (we just want to check if they're called, reproduce their behavior)
@@ -63,4 +64,24 @@ describe("Routing behavior (get ...)", function() {
  
 });
 
+describe("setoptions (post request)", function() {
+    beforeAll(function() {
+        this.app = express();
+        this.rm = new RequestManager(this.app, new DBConnection());
+        
+        this.req = {
+            query: {},
+            params: {},
+            body: {"joueur_concerne": 1, "animations": 1, "volume": .5}, // We keep the default settings, in order not to break the future tests
+          };
+        
+    });
+    it("should have called setoptions", function() {
+        spyOn(this.rm.DBConnection, "setOptions").and.callThrough();
+        
+        this.rm.setOptions(this.req, this.res);
+        
+        expect(this.rm.DBConnection.setOptions).toHaveBeenCalled();
+    })
+})
 

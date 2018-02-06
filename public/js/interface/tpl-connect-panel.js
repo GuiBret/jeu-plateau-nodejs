@@ -36,8 +36,9 @@ $("document").ready(function() {
                         
                         // Ajout des données dans la sessionStorage pour pouvoir les réutiliser par la suite
                         sessionStorage.setItem("username", userData.username);
-                        sessionStorage.setItem("password", userData.password);
                         sessionStorage.setItem("id", userData.id);
+                        sessionStorage.setItem("animations", userData.animations);
+                        sessionStorage.setItem("volume", userData.volume);
                         
                         // Redirection vers le menu principal
                         
@@ -57,7 +58,6 @@ $("document").ready(function() {
                     buttons: {
                         Ok: function() {
                             $(this).dialog("close");
-
                         }
                     }
                 });
@@ -75,8 +75,10 @@ function listenerFormConnexion() {
 }
 
 function defineGuestConnectionData() {
-    sessionStorage.setItem("username", "Invité");    
-    sessionStorage.setItem("password", "");
+    sessionStorage.setItem("username", "Invité");
     sessionStorage.setItem("id", "-1");
+    sessionStorage.setItem("animations": 1);
+    sessionStorage.setItem("volume": .5);
+    
     window.location.replace("menu/");
 }
