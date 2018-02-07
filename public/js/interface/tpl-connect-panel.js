@@ -77,8 +77,8 @@ function listenerFormConnexion() {
 function defineGuestConnectionData() {
     sessionStorage.setItem("username", "Invité");
     sessionStorage.setItem("id", "-1");
-    sessionStorage.setItem("animations": 1);
-    sessionStorage.setItem("volume": .5);
+    sessionStorage.setItem("animations", 1);
+    sessionStorage.setItem("volume", .5);
     
     window.location.replace("menu/");
 }
