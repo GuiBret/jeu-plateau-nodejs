@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html>
+    <head>
+        <%- include header-links.ejs %>
+        <link rel="stylesheet" type="text/css" href="/public/css/tpl-connect-panel.css" />
+
+        <title>Options</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <h1 class="text-center">options</h1>
+            
+            <% if(options) { %>
+            
+            <div class="col-12 col-md-4 offset-md-4">
+                <form id="form_general_options">
+                    <h4>general</h4>
+                    <label class="custom-control custom-checkbox label-animations">
+                        <input type="checkbox" class="custom-control-input" id="check-animations" <%= options.animations ? "checked" : "" %>/>
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Afficher les animations</span>
+                    </label>
+                    <br /> <br />
+                    
+                    <label for="slider-volume">
+                        Volume :
+                        <input type="range" min="0" max="100" value="<%= options.volume*100 %>" id="slider-volume" name="slider-volume" />
+                        <span id="span-volume"><%= options.volume * 100 %></span>
+                    </label>
+                </form>
+                <form id="buttons_form">
+                    <button class="btn btn-primary" type="button" id="btn-default">Rétablir valeurs d'origine</button>
+                    <button class="btn btn-primary" id="btn-save">Enregistrer</button>
+                    <button class="btn btn-primary" id="btn-quit">Quitter</button>
+                </form>
+                <% } else { %>
+                    <p>Vous n'êtes pas sur la bonne page.</p>
+                
+                <% } %>
+            </div>
+        </div>
+        
+        <%- include script-links.ejs %>
+        <script>
+            var options = <%- JSON.stringify(options); %>
+        </script>
+        <script type="text/javascript" src="/public/js/interface/options.js"></script>
+    </body>
+
+</html>
