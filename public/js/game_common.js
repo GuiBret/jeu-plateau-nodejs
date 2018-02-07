@@ -56,7 +56,7 @@ function resetPlayerPositions() {
 }
 
 function gestionCombatFront(callback) {
-    $("button").off("click", callback);
+    $("button").unbind("click");
 
     $("#boutons_combat").slideToggle(200, function() { 
             this.remove();

@@ -234,7 +234,8 @@ $(document).ready(function () {
     }
 
     function gestionCombat(e) { // Fonction callback de gestionTour en cas de combat
-
+            $("button").attr("disabled", true);
+        
             gestionCombatFront(this); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
 
             var decision = e.target.id.replace("btn_", "");
