@@ -106,7 +106,7 @@ class Grille {
                  nv_case = $("#"+ nv_position.join("-")),
                  arme_posee = false;
             
-            anc_case.html(""); // On efface le contenu de la case actuelle
+            
         
             if(typeof armeTourPrecedent !== "undefined") { // Si le joueur avait ramassé une arme au tour précédent
  
@@ -124,7 +124,9 @@ class Grille {
             this.appliquerAnimation(anc_case, nv_case, joueur_actuel, direction);
             
         } else {
-            
+            anc_case.html(""); // On efface le contenu de la case actuelle
+            image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
+            image_joueur.addClass(`joueur${String(joueur_actuel.id+1)}`); // On applique la classe au joueur (permettant le changement de couleur)
             nv_case.html(image_joueur); // On applique l'image à la nouvelle case
         }
 
@@ -163,6 +165,8 @@ class Grille {
             this.dimensionsJoueurs = {height: $(".joueur2").height(), width: $(".joueur2").width()};
         
         }
+        
+        anc_case.html("");
         
         let anc_position = this.calculPositionAnimation(anc_case),
             nv_position = this.calculPositionAnimation(nv_case),
