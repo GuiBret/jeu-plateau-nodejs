@@ -16,16 +16,12 @@ describe("database connect", function() {
             done();
         });
 
-        
-        
-        
     });
     
     
     it("should handle an incorrect password", function(done) {
         
         let connectionData = {"username": "usertest", "password": "monjeudeplateau"}; // Deliberately wrong password
-        
         
         this.db_connection.getUserData(connectionData).then( (res)=> {
            
@@ -35,13 +31,9 @@ describe("database connect", function() {
             console.info("Erreur");
 
         });
-        
-        
     });
     
-    
 });
-
 
 describe("user management", function() {
     
@@ -53,7 +45,6 @@ describe("user management", function() {
     it("should perform a proper user creation", function(done) {
         
         let params = {"username": "usertest3", "password": "monmotdepasse"};
-        
         
         this.db_connection.createUser(params).then((res) => {
             
@@ -181,8 +172,6 @@ describe("createOptions", function() {
             })
              
         });
-        
-        
     });
     
     
@@ -192,4 +181,3 @@ describe("createOptions", function() {
         
     })
 });
-
