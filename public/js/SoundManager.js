@@ -61,17 +61,17 @@ class SoundManager {
     createStepsSound() {
         let soundList = this.createSoundList(["STEPS"]);
         
-        return new Howl({src: soundList, volume:.3, loop:true});
+        return new Howl({src: soundList, volume:sessionStorage.getItem("volume"), loop:true});
         
     }
     
     createWinSound() {
         let soundList = this.createSoundList(["WIN"]);
-        return new Howl({src: soundList, volume:.3});
+        return new Howl({src: soundList, volume:sessionStorage.getItem("volume")});
     }
     
     createLossSound() {
         let soundList = this.createSoundList(["LOSE"]);
-        return new Howl({src: soundList, volume:.3});
+        return new Howl({src: soundList, volume:sessionStorage.getItem("volume")});
     }
 }

@@ -119,7 +119,7 @@ class Grille {
                 arme_posee = true; // Signale au serveur qu'on a posé une arme au tour précédent (lui dit de reset joueur_actuel.ancienne_arme);
             }
         
-        if(1+1 === 2) { // Condition préparant arrivée des options (si animations activées, on anime, sinon on efface et affiche uniquement), ici animation
+        if(sessionStorage.getItem("animations") === 1) { // If the user wants animations, we create one
             let direction = this.calculDirection(anc_position, nv_position);
             this.appliquerAnimation(anc_case, nv_case, joueur_actuel, direction);
             
@@ -184,7 +184,7 @@ class Grille {
         sound.rate(1.25);
         sound.play();
         $elem_animation.animate({left: nv_position.left, top:nv_position.top}, 800, () => {
-            sound.fade(.3, 0, 200);
+            sound.fade(sessionStorage.getItem("volume"), 0, 200);
             // Quand l'animation est finie, on affiche l'image de la nouvelle position et on supprime l'animation 
             nv_case.html(image_joueur);
             
