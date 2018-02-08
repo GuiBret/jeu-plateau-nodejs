@@ -2,6 +2,7 @@ var options;
 
 $.get(`../getoptions/${sessionStorage.getItem("id")}`, function(result) {
     options = result;
+    console.log(options);
     $("#check-animations").prop("checked", options.animations);
     $("#slider-volume").val(options.volume * 100);
     $("#span-volume").html(options.volume * 100);
@@ -9,7 +10,11 @@ $.get(`../getoptions/${sessionStorage.getItem("id")}`, function(result) {
 
 $(document).ready(function() {
     
-    
+    if(sessionStorage.getItem("id") == -1) { // if the user is connected as a guest, we add a warning message
+        let $message = $("<p id='warning-message'>Note : Vous êtes connecté en tant qu'invité. Vos modifications seront donc uniquement effectives durant cette session.</p>");
+        
+        $message.insertBefore("#form_general_options");
+    }
    
     /* Slider's span value update */
     $("#slider-volume").on("input", function(e) {
@@ -31,7 +36,7 @@ $(document).ready(function() {
     $("#btn-quit").on("click", function(e) {
         
         e.preventDefault();
-        window.location.replace("../../menu/");
+        window.location.replace("../menu/");
     });
     
     $("#btn-save").on("click", function(e) {

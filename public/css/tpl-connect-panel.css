@@ -10,7 +10,7 @@
 }
 
 #connect-button, #guest-button {
-    background-color:green
+    background-color:green;
 }
 
 #connect-button:hover, #guest-button:hover {
