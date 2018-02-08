@@ -2,10 +2,9 @@ var options;
 
 $.get(`../getoptions/${sessionStorage.getItem("id")}`, function(result) {
     options = result;
-    console.log(options);
-    $("#check-animations").prop("checked", options.animations);
-    $("#slider-volume").val(options.volume * 100);
-    $("#span-volume").html(options.volume * 100);
+    
+    setOptions();
+    
 });
 
 $(document).ready(function() {
@@ -24,45 +23,57 @@ $(document).ready(function() {
     
     /* "Set as default" button */
     $("#btn-default").on("click", function() {
-        /* Animations */
-        $("#check-animations").prop("checked", options.animations);
+        setOptions();
         
-        let volume_val = options.volume * 100; // The stored value is in range 0 <= val <= 1 to make it easier to pass to Howler (which requires values in that range)
-        /* Volume */
-        $("#slider-volume").val(options.volume * 100);
-        $("#span-volume").html(options.volume * 100);
     });
     
     $("#btn-quit").on("click", function(e) {
         
         e.preventDefault();
-        window.location.replace("../menu/");
+        backToMenu();
     });
     
     $("#btn-save").on("click", function(e) {
         e.preventDefault();
-        let volume_val = parseFloat($("#slider-volume").val() / 100),
-            animations_val = ($("#check-animations").prop("checked")) ? 1 : 0; // To get an integer value and pass it to SQL easily
-        let options = {"volume": volume_val, "animations": animations_val, "joueur_concerne": parseInt(sessionStorage.getItem("id"))};
         
+        defineOptions();
         
-        /* We update the options values in the sessionStorage */
-        sessionStorage.setItem("volume", volume_val);
-        sessionStorage.setItem("animations", animations_val);
-        //console
         if(sessionStorage.getItem("id") !== -1) { // If the user is not a guest, we send the options to the database
-
-            $.ajax({ /* Sending a POST request to the server so that it updates the database with the new values */
-                type: "POST",
-                data:JSON.stringify(options),
-                contentType: "application/json",
-                url: "/jeuplateau/sendoptions/"
-            });    
+            sendOptionsToServer();
         }
-        
-        
-        window.location.replace("../menu/");
+    
+        backToMenu();
         
     });
 });
 
+function backToMenu() {
+    window.location.replace("../menu/");
+}
+
+function setOptions() { // Used when the page is loaded and onclick "set as default", defines values (options is a global variable, so we don't need it as parameter)
+    $("#check-animations").prop("checked", options.animations);
+    $("#slider-volume").val(options.volume * 100);
+    $("#span-volume").html(options.volume * 100);
+}
+
+function defineOptions() { // Defines the options in sessionStorage
+    /* We update the options values in the sessionStorage */
+    
+    let volume_val = parseFloat($("#slider-volume").val() / 100),
+            animations_val = ($("#check-animations").prop("checked")) ? 1 : 0; // To get an integer value and pass it to SQL easily
+    
+    sessionStorage.setItem("volume", volume_val);
+    sessionStorage.setItem("animations", animations_val);
+}
+
+function sendOptionsToServer() {
+    let new_options = {"volume": sessionStorage.getItem("volume"), "animations": sessionStorage.getItem("animations"), "joueur_concerne": parseInt(sessionStorage.getItem("id"))};
+    
+    $.ajax({ /* Sending a POST request to the server so that it updates the database with the new values */
+                type: "POST",
+                data:JSON.stringify(new_options),
+                contentType: "application/json",
+                url: "/jeuplateau/sendoptions/"
+    });  
+}
