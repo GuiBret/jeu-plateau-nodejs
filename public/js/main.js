@@ -101,10 +101,9 @@ $(document).ready(function () {
     
     socket.on("lancementTour", function(infos) { // Param joueur : ID du joueur auquel c'est le tour
         resetPlayerPositions(); // On réétablit la position des joueurs
-        console.log(infos["joueur_actuel"]);
-        console.log(id_joueur);
+
         if(!local && infos["joueur_actuel"] === id_joueur || local) { // On vérifie si c'est à ce joueur de faire son tour ou si on est en local pour le laisser se déplacer
-            console.log("appel gestiontour");
+
             gestionTour(infos["joueur_actuel"], infos["dep_possibles"], infos["ancienne_arme"]);   
             
         } 
