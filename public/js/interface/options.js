@@ -1,4 +1,16 @@
+var options;
+
+$.get(`../getoptions/${sessionStorage.getItem("id")}`, function(result) {
+    options = result;
+    $("#check-animations").prop("checked", options.animations);
+    $("#slider-volume").val(options.volume * 100);
+    $("#span-volume").html(options.volume * 100);
+    console.log($("#span-volume"));
+});
+
 $(document).ready(function() {
+    
+    
    
     /* Slider's span value update */
     $("#slider-volume").on("input", function(e) {
@@ -33,8 +45,10 @@ $(document).ready(function() {
         /* We update the options values in the sessionStorage */
         sessionStorage.setItem("volume", volume_val);
         sessionStorage.setItem("animations", animations_val);
-        
+        //console
         if(sessionStorage.getItem("id") !== -1) { // If the user is not a guest, we send the options to the database
+            console.log("Sending data to db");
+            alert("Meuh");
             $.ajax({ /* Sending a POST request to the server so that it updates the database with the new values */
                 type: "POST",
                 data:JSON.stringify(options),
@@ -44,7 +58,7 @@ $(document).ready(function() {
         }
         
         
-        window.location.replace("../../menu/");
+        window.location.replace("../menu/");
         
     });
 });

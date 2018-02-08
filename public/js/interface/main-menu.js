@@ -37,7 +37,7 @@ $("document").ready(function() {
                
             break;
             case "btn-options": // Bouton des options
-               window.location.replace(`../options/${sessionStorage.getItem("id")}/`);
+               window.location.replace(`../options/`);
             break;
            case "btn-profile":
                 window.location.replace(`../profile/${sessionStorage.getItem("id")}/`);
