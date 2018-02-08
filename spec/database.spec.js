@@ -97,7 +97,7 @@ describe("match data", function() {
     });
     
     it("should be able to include a match", function(done) {
-       let match_info = {"player1": 1, "player2": 2, "winner": 1, "type":"online"};
+       let match_info = {"player1": 1, "player2": 2, "winner": 1, "type":"online", "remaining_hp": 25};
         
         this.db_connection.addMatch(match_info).then((res) => {
            expect(res).toEqual("SUCCESSFULLY_ADDED"); 
