@@ -216,7 +216,7 @@ describe("requestMovement", function() {
             this.gsm.usernameManagement(params).then(() => {
     
                 this.gsm.launchFirstTurn().then(() => {
-                    spyOn(this.gsm.socket, "emit");
+                    spyOn(this.gsm.io.in(`room-game${this.game_id}`), "emit");
                     let position = game.getCurrentPlayer().position,
                         new_position,
                         dep_possibles = game.grille.calculDepDispos(position);
@@ -233,7 +233,7 @@ describe("requestMovement", function() {
                     
                     
                     this.gsm.requestMovement(new_position).then(() => {
-                        expect(this.gsm.socket.emit).toHaveBeenCalledWith("confirmationDeplacement", {"position": new_position, "prev_position": position, "id_arme":-1, grille:game.getCurrentGrid(), cur_player: jasmine.any(Object) });
+                        expect(this.gsm.io.in(`room-game${this.game_id}`).emit).toHaveBeenCalledWith("confirmationDeplacement", {"position": new_position, "prev_position": position, "id_arme":-1, grille:game.getCurrentGrid(), cur_player: jasmine.any(Object) });
                     
                         done();             
                         
@@ -253,6 +253,50 @@ describe("requestMovement", function() {
     });
 });
 
+
+describe("surrenderOffline", function() {
+    beforeAll(function() {
+        let socket = { // Fake socket class
+            emit: function(msg) {
+            
+            },
+            join: function() {
+            
+            },
+            on: function() {
+            
+            }
+        }
+        
+        this.gh = gh;
+        this.game_id = gh.createGame();
+        socket.gameID = this.game_id;
+        this.gsm = new GameSocketManager(socket, DBConnection, io, this.gh);
+        
+    });
+    
+    it("should have deleted the game", function() {
+       this.gsm.surrenderOffline();
+       expect(this.gsm.socket).toBeNull(); 
+    });
+    
+    it("should have deleted the socket", function(done) {
+        
+       this.gsm.surrenderOffline.bind(this)
+        
+        this.gsm.gh.getGame(this.game_id).catch((error) => {
+            expect(error).toEqual("NO_GAME_FOUND");
+            done();
+        });
+       
+    });
+});
+
+describe("surrenderOnline", function() {
+    beforeAll(function() {
+        
+    });
+})
 
 /* 
 describe("launchNewTurn", function() {

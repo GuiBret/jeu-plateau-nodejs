@@ -150,6 +150,10 @@ h1 {
     transform:rotate(-90deg);
 }
 
+#btn-ok:hover, #btn-close:hover {
+    background-color:green;
+}
+
 span.vie, span.description-arme, span.degats {
 
     font-family:Typewriter, sans-serif;

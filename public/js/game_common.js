@@ -67,3 +67,7 @@ function weaponManagement(weapon) {
     
 }
 
+
+function askForSurrenderDialog() {
+    createModalDialog()
+}

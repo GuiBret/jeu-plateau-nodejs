@@ -23,6 +23,15 @@ $(document).ready(function () {
     socket.emit("inscriptionRoom", gameID); // On inscrit le client à sa room pour faciliter les communcations
     
     $(window).resize(resizeGrid); // Si la fenêtre est resizée, on redimensionnera la grille (fait au chargement de la grille pour les petits écrans de toute façon)
+    
+    
+    $("#surrender-btn").on("click", function() {
+        if(local) {
+            surrenderOffline();
+        } else {
+            surrenderOnline();
+        }
+    })
         
 
     if(!local) { // Partie online
@@ -196,6 +205,10 @@ $(document).ready(function () {
         }
     });
     
+    socket.on("surrenderedOffline", function() {
+        window.location.replace("../menu/");
+    })
+    
     /* 
     
     FONCTIONS
@@ -261,5 +274,24 @@ $(document).ready(function () {
                 interface_jeu.updateArme(playerToUpdate);   
             }       
         }
+    }
+    
+    // Displays an alert, if accepted, sends a signal (surrenderOffline) to the server which will delete the current game, then the server will send back another signal (surrenderedOffline) telling the user the game has been deleted 
+    function surrenderOffline() {
+        let info = {"title": "Abandonner la partie", "content": "Voulez-vous vraiment abandonner la partie ?"};
+        createValidationDialog(info, sendSurrenderSignalOffline);
+        
+    }
+    
+    function surrenderOnline() {
+        
+    }
+    
+    function sendSurrenderSignalOffline() {
+        socket.emit("surrenderOffline");
+    }
+    
+    function sendSurrenderSignalOnline() {
+        socket.emit("surrenderOnline", {"id": sessionStorage.getItem("id")});
     }
 });

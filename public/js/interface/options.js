@@ -1,13 +1,14 @@
 var options;
 
+// We initially get the options from the server, and, when acquired, update the fields (player ID === -1 will return default values)
 $.get(`../getoptions/${sessionStorage.getItem("id")}`, function(result) {
     options = result;
-    
     setOptions();
     
 });
 
 $(document).ready(function() {
+    "use strict";
     
     if(sessionStorage.getItem("id") == -1) { // if the user is connected as a guest, we add a warning message
         let $message = $("<p id='warning-message'>Note : Vous êtes connecté en tant qu'invité. Vos modifications seront donc uniquement effectives durant cette session.</p>");
@@ -24,11 +25,9 @@ $(document).ready(function() {
     /* "Set as default" button */
     $("#btn-default").on("click", function() {
         setOptions();
-        
     });
     
     $("#btn-quit").on("click", function(e) {
-        
         e.preventDefault();
         backToMenu();
     });
