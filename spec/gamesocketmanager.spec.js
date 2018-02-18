@@ -345,11 +345,11 @@ describe("surrenderOnline", function() {
     });
     
     it("should have deleted the socket", function() {
-        /*
+        
         this.gsm.surrenderOnline(this).then(() => {
             expect(this.gsm.socket).toBeNull();    
         });
-        */
+        
         
     });
     

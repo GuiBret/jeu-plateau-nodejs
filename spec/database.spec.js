@@ -63,7 +63,7 @@ describe("user management", function() {
        let params = {"username": "usertest", "password": "monmotdepasse"};
         
         this.db_connection.createUser(params).then((res) => {
-            expect(res.username).toEqual("usertest3");
+            expect(res.username).toEqual("usertest");
             this.db_connection.removeUser(params["username"]); // We remove the user when it's done in order to be able to retest it later
             done();
         }).catch((err) => {
@@ -106,6 +106,7 @@ describe("match data", function() {
         })
         .catch((err) => {
           console.log(err);  
+            done();
         });
         
         
@@ -180,4 +181,157 @@ describe("createOptions", function() {
         this.db_connection.removeUser("utilisateurdetest");
         
     })
+});
+
+/* Utility functions */
+describe("generateNewMatchQuery", function() {
+   beforeAll(function() {
+       this.db_connection = new DatabaseConnection();
+       this.game_info = {"winner": 1, "loser": 2, "type": "online", "remaining_hp": 50};
+   });
+    
+    it("should return the correct request with specified info", function() {
+        
+        let query = this.db_connection.generateNewMatchQuery(this.game_info);
+        expect(query).toEqual(`INSERT INTO matches VALUES(
+                '', 
+                1, 
+                2, 
+                (select id from match_type where match_label="online"),
+                50, 
+                NOW())`);
+    });
+});
+
+describe("generateConnectionQuery", function() {
+    beforeAll(function() {
+       this.db_connection = new DatabaseConnection();
+       this.params = {"username": "monutilisateurtest"};
+   });
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateConnectionQuery(this.params);
+        
+        expect(query).toEqual(`select 
+            connexion.username, connexion.password, connexion.id, options.animations, options.volume 
+            from options 
+            left join connexion 
+            on options.joueur_concerne = connexion.id 
+            where connexion.username="monutilisateurtest";`);
+    })
+});
+
+describe("generateUserCreationQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.userInfo = {"username": "monutilisateurtest", "password": "monpasswordtest"};
+        
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateUserCreationQuery(this.userInfo);
+    
+        expect(query).toEqual(`INSERT INTO connexion VALUES (
+                    '', 
+                    'monutilisateurtest', 
+                    'monpasswordtest', 
+                    '');`
+        );    
+    });
+    
+});
+
+describe("generateUserMatchesQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.id = 25;
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateUserMatchesQuery(this.id);
+    
+        expect(query).toEqual(`SELECT * FROM matches WHERE 25 in (winner, loser)`);    
+    });
+    
+});
+
+describe("generateGetUserId", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.userInfo = {"username": "monutilisateurtest"};
+        
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateGetUserIdQuery(this.userInfo);
+    
+        expect(query).toEqual(`SELECT id from connexion where username="monutilisateurtest";`
+        );    
+    });
+    
+});
+
+
+describe("generateUserProfileQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.id = 25;
+        
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateUserProfileQuery(this.id);
+    
+        expect(query).toEqual(`select username, 
+                (select count(*) as online_wins from matches where type=2 and 25 in (winner, loser)) as online_matches,
+                (select count(*) from matches where winner=25 and type=2) as online_wins,
+                (select count(*) from matches where type=3 and 25 in (winner, loser)) as ai_matches,
+                (select count(*) from matches where winner=25 and type=3) as ai_wins
+                from connexion where id=25;`
+        );    
+    });
+    
+})
+
+describe("generateGetOptionsQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.id = 25;
+        
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateGetOptionsQuery(this.id);
+    
+        expect(query).toEqual(`SELECT * from options where joueur_concerne=25;`);    
+    });
+    
+});
+
+describe("generateSetOptionsQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.info = {"animations": 1, "volume": 0.5, "joueur_concerne": 25};
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateSetOptionsQuery(this.info);
+    
+        expect(query).toEqual(`UPDATE options set animations=1, volume=0.5 where joueur_concerne=25`);    
+    });
+    
+});
+
+describe("generateCreateOptionsQuery", function() {
+    beforeAll(function() {
+        this.db_connection = new DatabaseConnection();
+        this.id = 25;
+    })
+    
+    it("should return the correct request with specified data", function() {
+        let query = this.db_connection.generateCreateOptionsQuery(this.id);
+    
+        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5)`);    
+    });
+    
 });
