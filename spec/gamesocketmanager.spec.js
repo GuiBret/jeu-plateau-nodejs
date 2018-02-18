@@ -255,7 +255,7 @@ describe("requestMovement", function() {
 
 
 describe("surrenderOffline", function() {
-    beforeAll(function() {
+    beforeEach(function() {
         let socket = { // Fake socket class
             emit: function(msg) {
             
@@ -275,14 +275,15 @@ describe("surrenderOffline", function() {
         
     });
     
-    it("should have deleted the game", function() {
+    it("should have deleted the socket", function() {
        this.gsm.surrenderOffline();
+        
        expect(this.gsm.socket).toBeNull(); 
     });
     
-    it("should have deleted the socket", function(done) {
+    it("should have deleted the game", function(done) {
         
-       this.gsm.surrenderOffline.bind(this)
+       this.gsm.surrenderOffline();
         
         this.gsm.gh.getGame(this.game_id).catch((error) => {
             expect(error).toEqual("NO_GAME_FOUND");
@@ -290,18 +291,16 @@ describe("surrenderOffline", function() {
         });
        
     });
+    
+    
+    afterAll(function() {
+        this.gsm = null;
+        this.gh = null;
+    })
 });
 
 describe("surrenderOnline", function() {
-    beforeAll(function() {
-        
-    });
-})
-
-/* 
-describe("launchNewTurn", function() {
-    
-    beforeAll(function() {
+    beforeEach(function(done) {
         let socket = { // Fake socket class
             emit: function(msg) {
             
@@ -312,21 +311,73 @@ describe("launchNewTurn", function() {
             on: function() {
             
             }
-        }
+        },
+            db_connection = {
+                addMatch: function(match_info) {
+                    
+                }
+            }
         
         this.gh = gh;
-        this.game_id = gh.createGame();
-        this.gsm = new GameSocketManager(socket, DBConnection, io, this.gh);
+        this.game_id = this.gh.createGame();
+        //console.log(this.gh.games);
+        socket.gameID = this.game_id;
+        this.socket = socket;
+        this.gsm = new GameSocketManager(socket, db_connection, io, this.gh);
+        
+        this.gh.getGame(this.socket.gameID).then((game) => {
+           
+            
+            let info_p1 = {"nom": "usertest", "id": 0, "online_id": 1},
+                info_p2 = {"nom": "usertest", "id": 1, "online_id": 2};
+            
+            game.setParams(["",""], false, socket);
+            
+            game.ajouterInfosJoueur(info_p1);
+            game.ajouterInfosJoueur(info_p2);
+            
+            done();
+            
+            
+        });
+        
         
     });
     
-    
-    afterAll(function(done) {
-        this.gsm.gh.deleteGame(this.game_id);
-        done();
+    it("should have deleted the socket", function() {
+        /*
+        this.gsm.surrenderOnline(this).then(() => {
+            expect(this.gsm.socket).toBeNull();    
+        });
+        */
+        
     });
     
+    it("should have deleted the game", function(done) {
+        
+        this.gsm.surrenderOnline(this).then(() => {
+        
+            this.gh.getGame(this.game_id).catch((error) => {
+                //console.log(error);
+                expect(error).toEqual("NO_GAME_FOUND");
+                done();
+            }); 
+            
+        }).catch(() => {
+            console.log("Erreur");  
+        });
+        
+        //expect(1).toEqual(1);
+        
+    });
     
-});
-
-*/
+    it("should have called 'addMatch' in order to add the match to the database", function(done) {
+        let socket = this.socket;
+        
+        spyOn(this.gsm.DBConnection, "addMatch");
+        this.gsm.surrenderOnline(this).then(() => {
+            expect(this.gsm.DBConnection.addMatch).toHaveBeenCalled();
+            done();
+        });
+    });
+})
