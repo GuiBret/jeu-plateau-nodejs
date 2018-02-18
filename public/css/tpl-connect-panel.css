@@ -11,10 +11,12 @@
 
 #connect-button, #guest-button {
     background-color:green;
+    border-color:green;
 }
 
 #connect-button:hover, #guest-button:hover {
-    background-color:green;
+    background-color:#006300;
+    border-color:#006300;
 }
 
 @media screen and (max-device-width: 420px) {
