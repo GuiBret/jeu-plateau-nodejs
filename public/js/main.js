@@ -205,9 +205,23 @@ $(document).ready(function () {
         }
     });
     
+    
     socket.on("surrenderedOffline", function() {
         window.location.replace("../menu/");
-    })
+    });
+    
+    socket.on("surrenderedOnline", function(params) {
+        let id = params["id"];
+        if(sessionStorage.getItem("id") !== id) { // If the user is the winner, we tell him he's won
+            
+            let info = { "title": "Victoire par abandon", "content": "Votre adversaire a lâchement abandonné la partie, vous avez donc gagné ! "};
+            
+            createModalDialog(info, function() { window.location.replace("../menu/")});
+            
+        } else {
+            window.location.replace("../menu/");    
+        }
+    });
     
     /* 
     
@@ -278,13 +292,15 @@ $(document).ready(function () {
     
     // Displays an alert, if accepted, sends a signal (surrenderOffline) to the server which will delete the current game, then the server will send back another signal (surrenderedOffline) telling the user the game has been deleted 
     function surrenderOffline() {
-        let info = {"title": "Abandonner la partie", "content": "Voulez-vous vraiment abandonner la partie ?"};
+        let info = {"title": "abandonner la partie", "content": "Voulez-vous vraiment abandonner la partie ?"};
         createValidationDialog(info, sendSurrenderSignalOffline);
         
     }
     
     function surrenderOnline() {
         
+        let info = {"title": "abandonner la partie", "content": "Si vous abandonnez, vous serez déclaré comme perdant et votre adversaire recevra la victoire selon son nombre de points de vie actuel. <br /> Êtes-vous sûr de vouloir continuer ?"}
+        createValidationDialog(info, sendSurrenderSignalOnline);
     }
     
     function sendSurrenderSignalOffline() {
