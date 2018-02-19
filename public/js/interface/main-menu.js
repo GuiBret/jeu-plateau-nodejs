@@ -10,8 +10,7 @@ $("document").ready(function() {
     })
     
     $("#btn-profile").tooltip();
-    let username = sessionStorage.getItem("username");
-    $("#username_label").html(username);
+    
     
     /* Button click management*/
     $(".button_container button").on("click", function(e) { // Listener unique pour tous les boutons, un switch dans le callback pour savoir quel bouton a été cliqué

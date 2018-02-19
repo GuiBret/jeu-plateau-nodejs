@@ -46,7 +46,11 @@ dialog {
 }
 
 .mdl-button {
-    background-color:#1B5E20;
+    background-color:green;
     color:white;
     font-family:"Typewriter";
+}
+
+.mdl-button:hover {
+    background-color:#006300;
 }

@@ -39,12 +39,11 @@
                 </div>
             
             </div> 
-            <div id="connected-as">
-                <p class="text-center text-md-right">Connecté en tant que : <span id="username_label">Invité</span></p>
-            </div>
+            <%- include connected-as.ejs %>
             
         </div>
         <%- include script-links.ejs %>
+        <script type="text/javascript" src="/public/js/interface/components/connected-as.js"></script>
         <script type="text/javascript" src="/public/js/interface/main-menu.js"></script>
     
     </body>

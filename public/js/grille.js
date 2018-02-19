@@ -80,13 +80,14 @@ class Grille {
             var case_deplacement = $("#"+ dep_dispo.join("-")),
 
                 enfants = []; // Enfants potentiels de la case (joueur ou arme)
+            
 
             case_deplacement.addClass("dep_possible");
 
             if(case_deplacement.children().length > 0) { // Si l'utilisateur clique sur une case contenant une arme
 
                 if(case_deplacement.find("img.img_arme").length !== 0) { // Si un des déplacements disponibles contient une arme ...
-
+                    case_deplacement.addClass("cont-img");
                     case_deplacement.children("img.img_arme").addClass("dep_possible"); // On permet à l'utilisateur de cliquer dessus
 
                 }
@@ -131,7 +132,7 @@ class Grille {
         }
 
         $(".dep_possible").removeClass("dep_possible"); // On efface les déplacements possibles
-        
+        $(".cont-img").removeClass("cont-img");
         return arme_posee;
             
     }
@@ -146,7 +147,6 @@ class Grille {
     getPosJoueur(joueur_actuel) {
         for(let y = 0; y < 11; y++) {
             for(let x = 0; x < 11; x++) {
-                console.time()
                 if(this.grille[x][y] == joueur_actuel ) {
                     return [x, y];
                 }

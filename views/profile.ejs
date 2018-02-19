@@ -9,15 +9,20 @@
     </head>
     <body>
         <div class="container-fluid">
-            <h1>Mon profil</h1>
+            <h1 class="text-center">Mon profil</h1>
             
-            <div class="col-12 col-md-4 offset-md-4">
-                <h2>Mes informations</h2>
-                <p><strong>Nom : </strong><span id="nom"><%- info.username -%></span></p>
+            <div class="col-12 col-md-6 offset-md-3">
+                <p><strong>Nom : </strong><span id="nom"></span></p>
+                <h4><strong>vos victoires</strong></h4>
+                <p><strong>En ligne : </strong>: <span id="online_wins"></span></p>
+                <p><strong>Contre l'IA : </strong>: <span id="ai_wins"></span></p>
+                <p><strong>Leaderboard : </strong><span id="leaderboard-rank"></span></p>
+                
+                
                 
             </div>
         </div>
-        
+        <%- include connected-as.ejs %>
         <%- include script-links.ejs %>
         <script type="text/javascript" src="/public/js/interface/profile.js"></script>
     </body>

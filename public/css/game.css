@@ -6,7 +6,6 @@ td {
     width:50px;
     background-size:contain;
     background-repeat:no-repeat;
-    text-align:center; /* Pour centrer les images de joueurs */
 }
 
 table {
@@ -14,10 +13,20 @@ table {
     /*border-collapse:collapse; Inutile ici, intégré dans Bootstrap*/
 }
 
+img {
+    display:block;
+    margin: 0 auto;
+}
+
 .grisee {
 
     filter:invert(100%);
     -webkit-filter:invert(100%);
+}
+
+.cont-img { /* Fixes a visual bug (when an image is on a ".dep_possible" tile, there is a small blank line at the bottom of it) */
+    display:flex;
+    align-items:center;
 }
 
 .img_arme, .joueur1, .joueur2 {
@@ -34,6 +43,11 @@ table {
 
 }
 
+
+.dep possible[contains(img)] {
+    display:flex;
+    align-items:center;
+}
 .dep_possible {
 
     filter:invert(20%);
