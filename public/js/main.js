@@ -207,6 +207,7 @@ $(document).ready(function () {
     
     
     socket.on("surrenderedOffline", function() {
+        console.log("surrenderedOffline reçu");
         window.location.replace("../menu/");
     });
     
