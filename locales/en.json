@@ -1,0 +1,21 @@
+{
+	"Connexion": "Login",
+	"Connexion invité": "Connect as guest",
+	"Si vous tapez un nouveau nom d'utilisateur / mot de passe, votre compte sera automatiquement créé": "If you enter a new username / password combo, your account will be automatically created.",
+	"Remplissez ce formulaire pour vous connecter :": "Fill this form to login :",
+	"ou": "or",
+	"Si vous vous connectez comme invité, vos victoires ne seront pas conservées en mémoire": "If you connect as guest, your victories will not be stored",
+	"Nom d'utilisateur": "Username",
+	"Mot de passe": "Password",
+	"Connecté en tant que :": "Connected as : ",
+	"Invité": "Invité",
+	"1V1 en ligne": "Online 1V1",
+	"Aucun utilisateur connecté": "Aucun utilisateur connecté",
+	"Duel contre l'IA": "Player vs AI",
+	"Menu principal": "Menu principal",
+	"Duel en local": "Duel en local",
+	"Options": "Options",
+	"Déconnexion": "Logout",
+	"Jusqu'a la mort": "Jusqu'a la mort",
+	"Mon profil": "My profile"
+}

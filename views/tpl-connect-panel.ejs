@@ -9,31 +9,31 @@
     </head>
     <body>
         <div class="container-fluid">
-            <h1 class="text-center" id="page-title">Connexion</h1>
+            <h1 class="text-center" id="page-title"><%= __("Connexion") %></h1>
             <div id="page" class="col-12 col-md-8 offset-md-2">
                 <div id="user_connect">
                     <form>
-                        <p class="text-center"> Remplissez ce formulaire pour vous connecter : </p>
+                        <p class="text-center"> <%= __("Remplissez ce formulaire pour vous connecter :") %></p>
                         <div class="form-group">
-                            <input type="text" id="username" name="username" placeholder="Nom d'utilisateur" class="form-control"/>
+                            <input type="text" id="username" name="username" placeholder="<%= __("Nom d'utilisateur") %>" class="form-control"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" id="password" name="password" placeholder="Mot de passe" class="form-control"/>
+                            <input type="password" id="password" name="password" placeholder="<%= __("Mot de passe") %>" class="form-control"/>
                         </div>
                         
                         
-                        <button id="connect-button" class="btn btn-primary d-block mx-auto" disabled>Connexion</button>
+                        <button id="connect-button" class="btn btn-primary d-block mx-auto" disabled><%= __("Connexion") %></button>
 
-                        <p class="text-center">Si vous tapez un nouveau nom d'utilisateur / mot de passe, votre compte sera automatiquement créé</p>    
+                        <p class="text-center"><%= __("Si vous tapez un nouveau nom d'utilisateur / mot de passe, votre compte sera automatiquement créé") %></p>    
 
                     </form>
                 </div>
 
-                <p class="text-center">ou</p>
+                <p class="text-center"><%= __("ou") %></p>
 
                 <div id="guest_connect">
-                    <button id="guest-button" class="btn btn-primary d-block mx-auto">Connexion invité</button>
-                    <p class="text-center">Si vous vous connectez comme invité, vos victoires ne seront pas conservées en mémoire</p>
+                    <button id="guest-button" class="btn btn-primary d-block mx-auto"><%= __("Connexion invité") %></button>
+                    <p class="text-center"><%= __("Si vous vous connectez comme invité, vos victoires ne seront pas conservées en mémoire") %></p>
 
                 </div>
             </div>  

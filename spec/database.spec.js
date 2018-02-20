@@ -136,7 +136,7 @@ describe("setOptions", function() {
     });
     
     it("should be able to correctly modify the specified user's options", function(done) {
-       this.db_connection.setOptions({"joueur_concerne": 1, "volume": 0.7, "animations": 0}).then(() => { // Then, after we've modified the options, we check if they have been updated in the database
+       this.db_connection.setOptions({"joueur_concerne": 1, "volume": 0.7, "animations": 0, "language": "fr"}).then(() => { // Then, after we've modified the options, we check if they have been updated in the database
            this.db_connection.getOptions(1).then((options) => {
                expect(options.animations).toEqual(0);
                expect(options.volume).toEqual(0.7);
@@ -213,7 +213,7 @@ describe("generateConnectionQuery", function() {
         let query = this.db_connection.generateConnectionQuery(this.params);
         
         expect(query).toEqual(`select 
-            connexion.username, connexion.password, connexion.id, options.animations, options.volume 
+            connexion.username, connexion.password, connexion.id, options.animations, options.volume, options.language
             from options 
             left join connexion 
             on options.joueur_concerne = connexion.id 
@@ -311,13 +311,13 @@ describe("generateGetOptionsQuery", function() {
 describe("generateSetOptionsQuery", function() {
     beforeAll(function() {
         this.db_connection = new DatabaseConnection();
-        this.info = {"animations": 1, "volume": 0.5, "joueur_concerne": 25};
+        this.info = {"animations": 1, "volume": 0.5, "joueur_concerne": 25, "language": "fr"};
     })
     
     it("should return the correct request with specified data", function() {
         let query = this.db_connection.generateSetOptionsQuery(this.info);
     
-        expect(query).toEqual(`UPDATE options set animations=1, volume=0.5 where joueur_concerne=25`);    
+        expect(query).toEqual(`UPDATE options set animations=1, volume=0.5, language="fr" where joueur_concerne=25`);    
     });
     
 });
@@ -331,7 +331,7 @@ describe("generateCreateOptionsQuery", function() {
     it("should return the correct request with specified data", function() {
         let query = this.db_connection.generateCreateOptionsQuery(this.id);
     
-        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5)`);    
+        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5, "fr")`);    
     });
     
 });

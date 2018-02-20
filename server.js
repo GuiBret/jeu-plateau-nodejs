@@ -3,6 +3,7 @@ let express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     ejs = require("ejs"),
+    i18n = require("i18n"),
     Game = require("./node_modules/jeu-backend/game.js"),
     DatabaseConnection = require("./node_modules/jeu-backend/utils/database_connection.js"),
     DBConnection = new DatabaseConnection(),
@@ -11,11 +12,19 @@ let express = require('express'),
     GameSearchSocketManager = require("./node_modules/jeu-backend/managers/GameSearchSocketManager"),
     GameSocketManager = require("./node_modules/jeu-backend/managers/GameSocketManager");
 
+i18n.configure({
+    locales:["en", "fr"],
+    directory: __dirname + '/locales',
+    autoReload:true
+});
+
+app.use(i18n.init);
+
 app.set("view engine", "ejs");
 app.use(express.json());
 
 let RequestManager = require("./node_modules/jeu-backend/managers/RequestManager.js"),
-    rm = new RequestManager(app, DBConnection);
+    rm = new RequestManager(app, DBConnection, i18n);
 
 server.listen(5000);
 

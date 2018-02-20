@@ -38,7 +38,8 @@ $("document").ready(function() {
                         sessionStorage.setItem("username", userData.username);
                         sessionStorage.setItem("id", userData.id);
                         sessionStorage.setItem("animations", userData.animations);
-                        sessionStorage.setItem("volume", userData.volume);
+                        sessionStorage.setItem("volume", userData.volume),
+                        sessionStorage.setItem("language", userData.language);
                         
                         // Redirection vers le menu principal
                         
