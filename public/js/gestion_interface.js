@@ -52,7 +52,7 @@ class Interface {
             _callback();
         });
 
-        $("#vie_j"+ String(id+1)).html(String(remaining_hp)+ " / 100 PV");
+        $("#vie_j"+ String(id+1)).html(String(remaining_hp));
 
 
     }

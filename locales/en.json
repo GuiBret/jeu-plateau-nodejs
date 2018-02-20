@@ -12,10 +12,15 @@
 	"1V1 en ligne": "Online 1V1",
 	"Aucun utilisateur connecté": "Aucun utilisateur connecté",
 	"Duel contre l'IA": "Player vs AI",
-	"Menu principal": "Menu principal",
-	"Duel en local": "Duel en local",
+	"Menu principal": "Main menu",
+	"Duel en local": "Offline 1V1",
 	"Options": "Options",
 	"Déconnexion": "Logout",
 	"Jusqu'a la mort": "Jusqu'a la mort",
-	"Mon profil": "My profile"
+	"Mon profil": "My profile",
+	"Arme": "Weapon",
+	"PV": "HP",
+	"Degâts": "Damage",
+	"Joueur": "Joueur",
+	"Abandonner": "Surrender"
 }
