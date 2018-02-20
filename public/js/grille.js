@@ -120,7 +120,9 @@ class Grille {
                 arme_posee = true; // Signale au serveur qu'on a posé une arme au tour précédent (lui dit de reset joueur_actuel.ancienne_arme);
             }
         
-        if(sessionStorage.getItem("animations") === 1) { // If the user wants animations, we create one
+        console.log(typeof(sessionStorage.getItem("animations")));
+        if(sessionStorage.getItem("animations") == 1) { // If the user wants animations, we create one
+            console.log("Application animations")
             let direction = this.calculDirection(anc_position, nv_position);
             this.appliquerAnimation(anc_case, nv_case, joueur_actuel, direction);
             
