@@ -23,9 +23,9 @@ class Interface {
         
         var $div_combat = $("<div class='col-12 d-flex justify-content-around'></div>"),
 
-            $btn_attaque = $("<button class='float-left' id='btn_attaque'>Attaquer</button>"),
+            $btn_attaque = $(`<button class='float-left' id='btn_attaque'>${__("Attaquer")}</button>`),
 
-            $btn_defense = $("<button class='float-right' id='btn_defense'>Défendre</button>"),
+            $btn_defense = $(`<button class='float-right' id='btn_defense'>${__("Défendre")}</button>`),
 
             id_joueur = joueur_actuel + 1;
 

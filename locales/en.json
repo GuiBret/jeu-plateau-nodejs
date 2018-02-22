@@ -8,7 +8,7 @@
 	"Nom d'utilisateur": "Username",
 	"Mot de passe": "Password",
 	"Connecté en tant que :": "Connected as : ",
-	"Invité": "Invité",
+	"Invité": "Guest",
 	"1V1 en ligne": "Online 1V1",
 	"Aucun utilisateur connecté": "Aucun utilisateur connecté",
 	"Duel contre l'IA": "Player vs AI",
@@ -22,5 +22,9 @@
 	"PV": "HP",
 	"Degâts": "Damage",
 	"Joueur": "Joueur",
-	"Abandonner": "Surrender"
+	"Abandonner": "Surrender",
+	"Afficher les animations": "Display animations",
+	"Rétablir valeurs d'origine": "Set as default",
+	"Enregistrer": "Save",
+	"Quitter": "Quit"
 }

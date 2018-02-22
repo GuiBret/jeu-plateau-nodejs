@@ -1,3 +1,5 @@
+
+
 var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:5000" : `http://${window.location.hostname}:5000`);
 
 
@@ -8,21 +10,24 @@ if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If 
 
 $("document").ready(function() {
     
+    
     $("#username, #password").on("change paste keyup", listenerFormConnexion); // Disables the "Connection" button if any of username and password's value is empty
   
     $("#guest-button").on("click", defineGuestConnectionData); // Defines the sessionStorage's settings of a guest, then redirects to menu
     
-    $("#connect-button").on("click", function(e) {
+    $("#connect-button").on("click", (e) => {
         e.preventDefault();
-        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val()};
+        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val(), "language": __.getLocale()};
 
+        
+        
         socket.emit("connectionRequest", connectionInfo);
         
         socket.on("connectionAccepted", function(userData) {
            let $dialog;
             
             if(userData.new_user) { // If we've had to create a new user
-                $dialog = $(`<div id="confirmation_connection" title="Compte créé">Le compte ${userData["username"]} vient d'être créé avec succès.</div>`);
+                $dialog = $(`<div id="confirmation_connection" title="Compte créé">${__("Le compte")} ${userData["username"]} ${__("vient d'être créé avec succès.")}</div>`);
             } else { // If it's a normal connection
                 $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
             }
@@ -76,10 +81,11 @@ function listenerFormConnexion() {
 }
 
 function defineGuestConnectionData() {
-    sessionStorage.setItem("username", "Invité");
+    sessionStorage.setItem("username", __("Invité"));
     sessionStorage.setItem("id", "-1");
     sessionStorage.setItem("animations", 1);
     sessionStorage.setItem("volume", .5);
+    sessionStorage.setItem("language", __.getLocale());
     
     window.location.replace("menu/");
 }

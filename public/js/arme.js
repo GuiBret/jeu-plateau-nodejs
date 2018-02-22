@@ -10,20 +10,20 @@ class Arme {
 
             case 1: // Arme standard
                 this.degats = 10;
-                this.nom = "Revolver";
+                this.nom = __("Revolver");
             break;
 
             case 2:
                 this.degats = 15
-                this.nom = "Fusil";
+                this.nom = __("Fusil");
             break;
             case 3:
                 this.degats = 20;
-                this.nom = "Fusil à pompe";
+                this.nom = __("Fusil à pompe");
             break;
             case 4:
                 this.degats = 25;
-                this.nom = "Lance-roquette";
+                this.nom = __("Lance-roquette");
             break;
 
         }       

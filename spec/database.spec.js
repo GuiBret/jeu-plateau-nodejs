@@ -326,12 +326,13 @@ describe("generateCreateOptionsQuery", function() {
     beforeAll(function() {
         this.db_connection = new DatabaseConnection();
         this.id = 25;
+        this.language = "en"
     })
     
     it("should return the correct request with specified data", function() {
-        let query = this.db_connection.generateCreateOptionsQuery(this.id);
+        let query = this.db_connection.generateCreateOptionsQuery(this.id, this.language);
     
-        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5, "fr")`);    
+        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5, "en")`);    
     });
     
 });
