@@ -126,7 +126,7 @@ class Grille {
             let direction = this.calculDirection(anc_position, nv_position);
             this.appliquerAnimation(anc_case, nv_case, joueur_actuel, direction);
             
-        } else {
+        } else { 
             anc_case.html(""); // On efface le contenu de la case actuelle
             image_joueur.attr("src", `/public/img/j_arme${joueur_actuel.arme.id}.png`);
             image_joueur.addClass(`joueur${String(joueur_actuel.id+1)}`); // On applique la classe au joueur (permettant le changement de couleur)

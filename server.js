@@ -30,7 +30,7 @@ server.listen(5000);
 
 
 io.sockets.on("connection", function(socket) {
-    let gssm = new GameSearchSocketManager(socket, DBConnection, io, gh);    
+    let gssm = new GameSearchSocketManager(socket, DBConnection, io, gh, i18n);    
 });
 
 /* Serveur de jeu, port 5001*/

@@ -4,6 +4,8 @@ $("document").ready(function() {
     
     verifClientConnecte(); // On vérifie si le client est connecté normalement ou en tant qu'invité, si aucun des deux, on affiche un dialog et le redirige vers la page de connexion
     
+    console.log(__.getLocale());
+    
     /* Button tooltips requiring connection */
     $("#btn-options, #btn-profile").on("mouseover", function() {
         $(this).tooltip();
@@ -65,6 +67,7 @@ function handleDisconnect() {
     sessionStorage.removeItem("id");
     sessionStorage.removeItem("username");
     sessionStorage.removeItem("password");
+    
     
     window.location.replace("../");
 }
