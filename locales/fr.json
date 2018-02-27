@@ -23,5 +23,9 @@
 	"Abandonner": "Abandonner",
 	"Joueur": "Joueur",
 	"Arme": "Arme",
-	"Degâts": "Degâts"
+	"Degâts": "Degâts",
+	"Afficher les animations": "Afficher les animations",
+	"Rétablir valeurs d'origine": "Rétablir valeurs d'origine",
+	"Enregistrer": "Enregistrer",
+	"Quitter": "Quitter"
 }

@@ -31,52 +31,9 @@
 
             <div id='panel-interfaces' class="col-12 col-sm-3 d-flex flex-row flex-sm-column justify-content-around">
 
-                <div id='interface_1'>
+                <%- include("player-interface",{val:"1"}) %>
+                <%- include("player-interface",{val:"2"}) %>
 
-                    <h3 class='nom_joueur text-center' id='nom_j1'><%= __("Joueur") %> 1</h3>
-
-                    <div class="row text-center">
-                        <div class="col-6 offset-3 col-sm-3 offset-sm-2 container-image-joueur">
-                            <img class='img_interface_joueur interface-joueur1' src='/public/img/j_arme1.png'/>
-                        </div>
-                        <div class="col-12 col-md-7">
-
-                            <span class="description-arme"><%= __("Arme") %> : <span id="nom_arme_j1">Revolver</span></span> <br />
-                            <span class="degats"><%= __("Degâts") %> : <span id="degats_arme_j1">10</span> <%= __("PV") %></span>
-
-                        </div>
-
-                    </div>
-                    <div class="col-12 text-center">
-
-                        <progress max="100" value="100" id='barre_j1'></progress> <br />
-                        <span><span id='vie_j1' class="vie text-center">100</span>/100 <%= __("PV") %></span> <br />
-
-                    </div>
-                </div>
-                
-                <div id='interface_2'>
-
-                    <h3 class='nom_joueur text-center' id='nom_j2'><%= __("Joueur") %> 2</h3>
-                    <div class="row text-center">
-                        <div class="col-6 offset-3 col-md-3 offset-md-2 container-image-joueur">
-                            <img class='img_interface_joueur interface-joueur2' src='/public/img/j_arme1.png'/>
-                        </div>
-                        <div class="col-12 col-md-7">
-
-                            <span class="description-arme"><%= __("Arme") %> : <span id="nom_arme_j2">Revolver</span></span> <br />
-                            <span class="degats"><%= __("Degâts") %> : <span id='degats_arme_j2'>10</span> <%= __("PV") %></span>
-
-                        </div>
-                    </div>
-                    <div class="col-12 text-center">
-
-                        <progress max="100" value="100" id="barre_j2"></progress> <br />
-                        <span><span id='vie_j2' class="vie text-center">100</span>/100 <%= __("PV") %></span><br />
-
-                    </div>
-
-                </div>
 
             </div>
 
