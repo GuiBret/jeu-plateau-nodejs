@@ -45,11 +45,6 @@ $("document").ready(function() {
                         sessionStorage.setItem("animations", userData.animations);
                         sessionStorage.setItem("volume", userData.volume),
                         sessionStorage.setItem("language", userData.language);
-                        alert("Nouveau locale : "+ userData.language);
-                        __.setLocale(userData.language);
-                        
-                        alert("Nouveau locale : "+ __.getLocale());
-                        
                         
                         // Redirection vers le menu principal
                         
