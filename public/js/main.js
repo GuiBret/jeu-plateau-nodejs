@@ -25,7 +25,7 @@ $(document).ready(function () {
     
     $(window).resize(resizeGrid); // Si la fenêtre est resizée, on redimensionnera la grille (fait au chargement de la grille pour les petits écrans de toute façon)
     
-    
+    console.log("On passe ici");
     $("#surrender-btn").on("click", function() {
         if(local) {
             surrenderOffline();
@@ -268,7 +268,7 @@ $(document).ready(function () {
     }
 
     function gestionCombat(e) { // Fonction callback de gestionTour en cas de combat
-            $("button").attr("disabled", true);
+            $("#btn-attaque, #btn-defense").attr("disabled", true);
         
             gestionCombatFront(this); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
 
