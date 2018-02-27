@@ -12,7 +12,8 @@ var socket = io.connect((window.location.hostname === "localhost") ? "http://loc
     id_joueur,
     nom_joueur, // Variable provisoire (utilisée uniquement en online) servant à stocker le nom du joueur le temps qu'on récupère celui de l'ennemi
     tour_lance = false,
-    local = isLocal(); // Boolean, self-explanatory, function defined in game_common.js
+    local = isLocal(), // Boolean, self-explanatory, function defined in game_common.js
+    decision; 
 
 $(document).ready(function () {
 
@@ -172,16 +173,22 @@ $(document).ready(function () {
             vie_restante = infosDegats["remaining_hp"],
             arme = infosDegats["arme"],
             posture = infosDegats["posture"],
-            soundList = [`WEAPON${arme}`];
+            soundList = [`WEAPON${arme}`],
+            decision_bool = (decision === "attaque") ? true : false; // Decision is initialized at the beginning of the file, and defined in gestionCombat
         
-        if (!posture)  
-            soundList.push("DEFENSE"); // If the player receiving damage was in defensive position, we also play the defense sound
+        if(decision_bool) {
+            if (!posture)  
+                soundList.push("DEFENSE"); // If the player receiving damage was in defensive position, we also play the defense sound
 
-        sm.playSound(soundList);
+            sm.playSound(soundList);
         
-        interface_jeu.updateInterfaceCombat(id, vie_restante, function() {
+            interface_jeu.updateInterfaceCombat(id, vie_restante, function() {
+                socket.emit("newTurn");
+            });    
+        } else { // If the player decided to defend, we don't have much to do, and then can emit newTurn
             socket.emit("newTurn");
-        });
+        }
+        
     });
     
     socket.on("partieTerminee", function(infos) {
@@ -265,7 +272,7 @@ $(document).ready(function () {
         
             gestionCombatFront(this); // Enlève le listener des boutons et slidetoggle les boutons puis les efface
 
-            var decision = e.target.id.replace("btn_", "");
+            decision = e.target.id.replace("btn_", "");
 
             socket.emit("decisionJoueur", decision);
 

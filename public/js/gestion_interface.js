@@ -47,18 +47,16 @@ class Interface {
     
 
     updateInterfaceCombat(id, remaining_hp, _callback) { // Met à jour la barre de vie et le texte des PV, on envoie l'id du joueur concerné pour replacer facilement les données
-        
+            
         $("#barre_j"+ String(id+1)).animate({"value" : remaining_hp}, 800, "swing", function() {
             _callback();
         });
 
-        $("#vie_j"+ String(id+1)).html(String(remaining_hp));
-
-
+         $("#vie_j"+ String(id+1)).html(String(remaining_hp));    
+         
     }
 
     
-
     updateArme(joueur, arme) { // Fonction mettant à jour le nom, l'image et les degâts de l'arme dans l'interface
         
         $(`#nom_arme_j${joueur.id+1}`).html(joueur.arme.nom);
