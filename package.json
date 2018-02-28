@@ -3,17 +3,16 @@
     "description": "Un jeu de plateau originellement solo modifié pour le multi",
     "version": "1.0.0",
     "engines": {
-        "node": "9.3.0"
+        "node": "8.9.6"
     },
     "dependencies": {
         "ejs": "^2.5.7",
         "express": "^4.16.2",
         "i18n": "^0.8.3",
         "i18n-for-browser": "^0.9.7",
-        "jasmine": "^2.8.0",
+        "jasmine": "^2.99.0",
         "md5": "^2.2.1",
         "mysql": "^2.15.0",
-        "pm2": "^2.9.1",
         "socket.io": "^2.0.4"
     },
     "devDependencies": {},
