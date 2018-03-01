@@ -23,26 +23,26 @@ function affichageFinPartieOnline(infos, joueur_actuel, sm) {
         sm.playSound(["LOSE"]);
         dialog_text = {"title": "Défaite...", "content": `Vous avez perdu contre ${infos["winner"]} en ${infos["turns"]} tours...`};
     }
-    
-    afficherDialogFinPartie(dialog_text); 
+
+    afficherDialogFinPartie(dialog_text);
 }
 
 function affichageFinPartieOffline(infos) {
-    
+
     let dialog_text= {"title": "Fin de partie", "content": `${infos["winner"]} a gagné en ${infos["turns"]} tours !`};
-    
+
     afficherDialogFinPartie(dialog_text);
-    
-} 
+
+}
 
 function afficherDialogFinPartie(dialog_text) {
     createModalDialog(dialog_text, function() { window.location.replace("../menu/")});
-        
+
 }
 /* Fonctions utilitaires */
 
-function isLocal() { 
-        return window.location.pathname.split("/").pop() === "local"; 
+function isLocal() {
+        return window.location.pathname.split("/").pop() === "local";
 }
 
 function getEnemy() {
@@ -51,23 +51,18 @@ function getEnemy() {
 
 function resetPlayerPositions() {
         joueurs[0].position = grille.getPosJoueur(1); // On remet à jour la position des joueurs
-        joueurs[1].position = grille.getPosJoueur(2);  
-        
+        joueurs[1].position = grille.getPosJoueur(2);
+
 }
 
 function gestionCombatFront(callback) {
     $("#btn_defense, #btn_attaque").unbind("click");
 
-    $("#boutons_combat").slideToggle(200, function() { 
+    $("#boutons_combat").slideToggle(200, function() {
             this.remove();
     });
 }
 
 function weaponManagement(weapon) {
-    
-}
 
-
-function askForSurrenderDialog() {
-    createModalDialog()
 }

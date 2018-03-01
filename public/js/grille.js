@@ -45,11 +45,7 @@ class Grille {
                 ligne.append(case_jeu);
             }
             grilleEcran.append(ligne);
-
         }
-
-
-
     }
 
     appliquerImagePerso(coords, case_jeu) {
