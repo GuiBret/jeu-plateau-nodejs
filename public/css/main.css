@@ -47,10 +47,12 @@ dialog {
 
 .btn {
     background-color:green;
+    border-color:green;
     color:white;
     font-family:"Typewriter";
 }
 
 .btn:hover {
     background-color:#006300;
+    border-color:#006300;
 }
