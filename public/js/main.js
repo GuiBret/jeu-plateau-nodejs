@@ -131,9 +131,7 @@ $(document).ready(function () {
 
 
         grille.updateGrille(nv_grille); // Réétablit la grille telle que modifiée sur le serveur
-
-        weaponManagement(arme); // Performs actions considering the variable "arme" (if an array => the player got a new weapon at the previous turn, we have to put the previous one at its position, number && != -1 : he just got a new weapon)
-
+        
         if (typeof arme === "number" && arme !== -1) { // If one of the players stepped on a new weapon
             gestionNouvelleArme(cur_player, arme);
         }
