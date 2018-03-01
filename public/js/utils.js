@@ -18,32 +18,30 @@ function createModalDialog(info, callback) {
 }
 // Creates a modal with Material which will require 2 buttons (for example, surrender request)
 function createValidationDialog(info, callbackOK) {
-    let dialog = document.createElement("dialog");
+  "use strict";
 
-    dialog.classList = "md1-dialog__actions";
+    if(!$("#modalDialog").length) {
 
-     dialog.innerHTML = `<h4 class='md1-dialog__title text-center'>${info.title}</h4><div class='md1-dialog__content'><p>${info.content}</p></div><div class="md1-dialog__actions d-flex flex-row justify-content-around"><button type='button' id="btn-ok" class="mdl-button mdl-js-button mdl-button--raised yes">Oui</button><button type="button" id="btn-close" class="mdl-button mdl-js-button mdl-button--raised">Non</button></div>`;
+      let dialog =`<div class='modal fade' id='modalDialog'><div class='modal-dialog' role='document'><div class='modal-content'><div class='modal-header'><h5 class='title'>${info.title}</h5></div><div class='modal-body'>${info.content}</div><div class='modal-footer'><button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button><button type="button" class="btn btn-primary yes">Oui</button></div></div></div></div>`;
 
-    //dialogPolyfill.register(dialog);
+      $("body").append(dialog);
 
-    document.body.appendChild(dialog);
-
-    $(".button.yes").on("click", callbackOK);
+      $("button.yes").on("click", callbackOK);
 
 
 
-    $("#btn-close").on("click", () => { // If the user doesn't accept, we remove the decision
-        "use strict";
+      $("#btn-close").on("click", () => { // If the user doesn't accept, we remove the decision
+          "use strict";
 
-        dialog.close();
-        $("dialog").remove();
+          dialog.close();
+          $("dialog").remove();
 
-    });
+      });
 
-    $("#btn-ok").on("click", callbackOK);
+      $("#btn-ok").on("click", callbackOK);
 
-    dialog.showModal();
+    }
 
-    $(".mdl-button").blur();
+    $("#modalDialog").modal("show");
 
 }

@@ -45,12 +45,12 @@ dialog {
     box-shadow:0 0 40px rgba(0,0,0,.4);
 }
 
-.mdl-button {
+.btn {
     background-color:green;
     color:white;
     font-family:"Typewriter";
 }
 
-.mdl-button:hover {
+.btn:hover {
     background-color:#006300;
 }
