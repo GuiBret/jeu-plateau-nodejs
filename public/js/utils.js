@@ -1,3 +1,8 @@
+/*
+  Contains generic functions, not meant to be directly used by the game, but called by functions which have a direct access to it
+
+*/
+
 
 /* Creates a modal with Bootstrap which will require only one button (access to restricted page, game finished, etc) */
 function createModalDialog(info, callback) {
