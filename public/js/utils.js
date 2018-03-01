@@ -28,16 +28,6 @@ function createValidationDialog(info, callbackOK) {
 
       $("button.yes").on("click", callbackOK);
 
-
-
-      $("#btn-close").on("click", () => { // If the user doesn't accept, we remove the decision
-          "use strict";
-
-          dialog.close();
-          $("dialog").remove();
-
-      });
-
       $("#btn-ok").on("click", callbackOK);
 
     }
