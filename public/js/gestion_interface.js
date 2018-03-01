@@ -17,12 +17,11 @@ class Interface {
 
     genInterfaceCombat(joueur_actuel) { // Affiche les boutons attaque et défense
 
-        var $div_combat = $("<div class='col-12 d-flex justify-content-around'></div>"),
+        var $div_combat = $("<div class='col-12 d-flex justify-content-around' id='boutons_combat'></div>"),
             $btn_attaque = $(`<button class='float-left' id='btn_attaque'>${__("Attaquer")}</button>`),
             $btn_defense = $(`<button class='float-right' id='btn_defense'>${__("Défendre")}</button>`),
             id_joueur = joueur_actuel + 1;
 
-        $div_combat.attr("id", "boutons_combat");
         $div_combat.css("display", "none");
 
         $div_combat.append($btn_attaque);
@@ -48,11 +47,8 @@ class Interface {
     updateArme(joueur, arme) { // Fonction mettant à jour le nom, l'image et les degâts de l'arme dans l'interface
 
         $(`#nom_arme_j${joueur.id+1}`).html(joueur.arme.nom);
-
         $(`#degats_arme_j${joueur.id+1}`).html(joueur.arme.degats);
-
         $(`.joueur${joueur.id+1}`).attr("src", joueur.design);
-
         $(`.interface-joueur${joueur.id+1}`).attr("src", joueur.design);
 
     }
