@@ -1,5 +1,5 @@
 
-/* Creates a modal with Material which will require only one button (access to restricted page, game finished, etc) */
+/* Creates a modal with Bootstrap which will require only one button (access to restricted page, game finished, etc) */
 function createModalDialog(info, callback) {
     let dialog = $(`<div class='modal fade' id='modalDialog'><div class='modal-dialog' role='document'><div class='modal-content'><div class='modal-header'><h5 class='title'>${info.title}</h5></div><div class='modal-body'>${info.content}</div><div class='modal-footer mx-auto'><button type="button" class="btn btn-primary" id='btn-ok'>OK</button></div></div></div></div>`);
 
@@ -12,7 +12,7 @@ function createModalDialog(info, callback) {
     dialog.modal("show");
 
 }
-// Creates a modal with Material which will require 2 buttons (for example, surrender request)
+// Creates a modal with Bootstrap which will require 2 buttons (for example, surrender request)
 function createValidationDialog(info, callbackOK) {
   "use strict";
 
