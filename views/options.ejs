@@ -10,7 +10,7 @@
     <body>
         <div class="container-fluid">
             <h1 class="text-center">options</h1>
-            
+
             <div class="col-12 col-md-4 offset-md-4">
                 <form id="form_general_options">
                     <h4>général</h4>
@@ -20,12 +20,18 @@
                         <span class="custom-control-description"><%= __("Afficher les animations") %></span>
                     </label>
                     <br /> <br />
-                    
+
                     <label for="slider-volume">
                         Volume :
                         <input type="range" min="0" max="100" id="slider-volume" name="slider-volume" />
                         <span id="span-volume"></span>
                     </label>
+                    <p>
+                        Langue :
+                        <img class="flag" id="fr" src="/public/assets/flags/fr.png" / />
+                        <img class="flag" id="en" src="/public/assets/flags/en.png" / />
+                    </p>
+
                 </form>
                 <form id="buttons_form">
                     <button class="btn btn-primary" type="button" id="btn-default"><%= __("Rétablir valeurs d'origine") %></button>
@@ -34,7 +40,7 @@
                 </form>
             </div>
         </div>
-        
+
         <%- include script-links.ejs %>
         <script>
         </script>
