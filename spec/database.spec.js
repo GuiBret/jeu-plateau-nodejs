@@ -1,6 +1,6 @@
 const DatabaseConnection = require("../node_modules/jeu-backend/utils/database_connection");
 
-
+/*
 describe("database connect", function() {
    beforeAll(function() {
        this.db_connection = new DatabaseConnection();
@@ -143,12 +143,16 @@ describe("setOptions", function() {
 
                done();
            });
+       }).catch(() => {
+           console.log("Erreur setOptions test modification utilisateur")
        });
     });
 
     afterAll(function(done) {
-        this.db_connection.setOptions({"joueur_concerne": 1, "volume": .5, "animations": 1}).then(() => {
+        this.db_connection.setOptions({"joueur_concerne": 1, "volume": .5, "animations": 1, "language": "fr"}).then(() => {
             done();
+        }).catch(() => {
+            console.log("Erreur afterAll test setOptions");
         })
     })
 });
@@ -203,7 +207,7 @@ describe("generateNewMatchQuery", function() {
 
         let query = this.db_connection.generateNewMatchQuery(this.game_info);
         expect(query).toEqual(`INSERT INTO matches VALUES(
-                '',
+                0,
                 1,
                 2,
                 (select id from match_type where match_label="online"),
@@ -241,7 +245,7 @@ describe("generateUserCreationQuery", function() {
         let query = this.db_connection.generateUserCreationQuery(this.userInfo);
 
         expect(query).toEqual(`INSERT INTO connexion VALUES (
-                    '',
+                    0,
                     'monutilisateurtest',
                     'monpasswordtest',
                     '');`
@@ -341,7 +345,7 @@ describe("generateCreateOptionsQuery", function() {
     it("should return the correct request with specified data", function() {
         let query = this.db_connection.generateCreateOptionsQuery(this.id, this.language);
 
-        expect(query).toEqual(`INSERT INTO options VALUES ('', 25, 1, .5, "en")`);
+        expect(query).toEqual(`INSERT INTO options VALUES (0, 25, 1, .5, "en")`);
     });
 
 });

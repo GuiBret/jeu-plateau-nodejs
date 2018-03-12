@@ -318,7 +318,6 @@ describe("surrenderOnline", function() {
 
         this.gh = gh;
         this.game_id = this.gh.createGame();
-        //console.log(this.gh.games);
         socket.gameID = this.game_id;
         this.socket = socket;
         this.gsm = new GameSocketManager(socket, db_connection, io, this.gh);
@@ -356,7 +355,7 @@ describe("surrenderOnline", function() {
         this.gsm.surrenderOnline(this).then(() => {
 
             this.gh.getGame(this.game_id).catch((error) => {
-                //console.log(error);
+                
                 expect(error).toEqual("NO_GAME_FOUND");
                 done();
             });
