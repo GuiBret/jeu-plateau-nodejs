@@ -23,3 +23,13 @@
     background-color:#006300;
     cursor:pointer;
 }
+
+.flag {
+    height:50px;
+    width:50px;
+    cursor:pointer;
+}
+
+.current {
+    box-shadow:1px 1px black;
+}
