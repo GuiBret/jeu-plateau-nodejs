@@ -9,53 +9,60 @@ if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If 
 }
 
 $("document").ready(function() {
-    
-    
+
     $("#username, #password").on("change paste keyup", listenerFormConnexion); // Disables the "Connection" button if any of username and password's value is empty
-  
+
     $("#guest-button").on("click", defineGuestConnectionData); // Defines the sessionStorage's settings of a guest, then redirects to menu
-    
+
     $("#connect-button").on("click", (e) => {
         e.preventDefault();
-        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val(), "language": __.getLocale()};
 
-        
-        
-        socket.emit("connectionRequest", connectionInfo);
-        
-        socket.on("connectionAccepted", function(userData) {
-           let $dialog;
-            
-            if(userData.new_user) { // If we've had to create a new user
-                $dialog = $(`<div id="confirmation_connection" title="Compte créé">${__("Le compte")} ${userData["username"]} ${__("vient d'être créé avec succès.")}</div>`);
-            } else { // If it's a normal connection
-                $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
-            }
-           
-            
-            $dialog.dialog({
-                modal:true,
-                buttons: {
-                    Ok: function() {
-                        $(this).dialog("close");
-                        
-                        // Ajout des données dans la sessionStorage pour pouvoir les réutiliser par la suite
-                        sessionStorage.setItem("username", userData.username);
-                        sessionStorage.setItem("id", userData.id);
-                        sessionStorage.setItem("animations", userData.animations);
-                        sessionStorage.setItem("volume", userData.volume),
-                        sessionStorage.setItem("language", userData.language);
-                        
-                        // Redirection vers le menu principal
-                        
-                        window.location.replace("menu/");
-                    }
-                }
-            })
+        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val(), "language": __.getLocale()}; // The language will only be used in a user creation
+
+
+        $.ajax({ /* Sending a POST request to the server which will get this user / create it and update the locale */
+                    type: "POST",
+                    data:JSON.stringify(connectionInfo),
+                    contentType: "application/json",
+                    url: "/jeuplateau/connect"
+        }).then((userData) => {
+
+            let $dialog;
+            document.cookie = `locale=${userData.language}`; // We set the locale as a cookie so that the server gets it on each request
+             if(userData.new_user) { // If we've had to create a new user
+                 $dialog = $(`<div id="confirmation_connection" title="Compte créé">${__("Le compte")} ${userData["username"]} ${__("vient d'être créé avec succès.")}</div>`);
+
+             } else { // If it's a normal connection
+                 $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
+             }
+
+
+             $dialog.dialog({
+                 modal:true,
+                 buttons: {
+                     Ok: function() {
+                         $(this).dialog("close");
+
+
+                         // Ajout des données dans la sessionStorage pour pouvoir les réutiliser par la suite
+                         sessionStorage.setItem("username", userData.username);
+                         sessionStorage.setItem("id", userData.id);
+                         sessionStorage.setItem("animations", userData.animations);
+                         sessionStorage.setItem("volume", userData.volume);
+                         alert("Meuh")
+
+ -                        __.setLocale(userData.language);
+
+                         // Redirection vers le menu principal
+
+                         window.location.replace("menu/");
+                     }
+                 }
+             })
         });
-        
+
         socket.on("wrongPassword", function() {
-            
+
             if(!$("#wrong_password").length) { // Avoids creating more than 1 alert windo
                 let $dialog = $(`<div id="wrong_password" title="Mot de passe incorrect">Vous avez entré un mauvais mot de passe, veuillez rééssayer.</div>`);
 
@@ -70,7 +77,7 @@ $("document").ready(function() {
             } else {
                 $("#wrong_password").dialog("open");
             }
-            
+
         });
     });
 });
@@ -86,6 +93,6 @@ function defineGuestConnectionData() {
     sessionStorage.setItem("animations", 1);
     sessionStorage.setItem("volume", .5);
     sessionStorage.setItem("language", __.getLocale());
-    
+
     window.location.replace("menu/");
 }
