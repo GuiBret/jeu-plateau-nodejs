@@ -35,13 +35,21 @@ $("document").ready(function() {
         }).then((userData) => {
 
             let $dialog;
-            document.cookie = `locale=${userData.language}`; // We set the locale as a cookie so that the server gets it on each request
-             if(userData.new_user) { // If we've had to create a new user
-                 $dialog = $(`<div id="confirmation_connection" title="Compte créé">Le compte ${userData["username"]} vient d'être créé avec succès.</div>`);
+            if(userData.result == "KO") {
+                alert("Le mot de passe est incorrect");
+                document.getElementById('password').value = "";
 
-             } else { // If it's a normal connection
-                 $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
-             }
+            } else {
+
+                document.cookie = `locale=${userData.language}`; // We set the locale as a cookie so that the server gets it on each request
+                 if(userData.new_user) { // If we've had to create a new user
+                     $dialog = $(`<div id="confirmation_connection" title="Compte créé">Le compte ${userData["username"]} vient d'être créé avec succès.</div>`);
+
+                 } else { // If it's a normal connection
+                     $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
+                 }
+
+            }
 
 
              $dialog.dialog({
