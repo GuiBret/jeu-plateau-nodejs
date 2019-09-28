@@ -5,7 +5,8 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server),
     ejs = require("ejs"),
-    i18n = require("i18n-2"),
+    i18n = require("i18n"),
+    i18nExpressHelper = require("i18n-for-browser/lib/middleware"),
     Game = require("./node_modules/jeu-backend/game.js"),
     cookieParser = require("cookie-parser"),
     DatabaseConnection = require("./node_modules/jeu-backend/utils/database_connection.js"),
@@ -15,7 +16,7 @@ var express = require('express'),
     GameSearchSocketManager = require("./node_modules/jeu-backend/managers/GameSearchSocketManager"),
     GameSocketManager = require("./node_modules/jeu-backend/managers/GameSocketManager");
 
-i18n.expressBind(app, {
+i18n.configure({
     locales:["en", "fr"],
     directory: __dirname + '/locales',
     extension: ".json",
@@ -25,14 +26,18 @@ i18n.expressBind(app, {
 
 app.use(cookieParser());
 
+
 // set up the middleware
 app.use(function(req, res, next) {
-  req.i18n.setLocaleFromCookie();
+  res.locals.__ = res.__ = function() {
+      return i18n.__.apply(req, arguments)
+  };
+  
   next();
 });
 
 
-
+app.use(i18nExpressHelper(i18n))
 
 app.set("view engine", "ejs");
 app.use(express.json());

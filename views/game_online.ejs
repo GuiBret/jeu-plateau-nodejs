@@ -10,7 +10,7 @@
     </head>
     <body>
         <h1>Jusqu'à la mort</h1>
-        
+
         <button class="btn" id="surrender-btn">Abandonner</button>
 
         <div class="espace_jeu d-flex flex-column flex-sm-row">
@@ -71,10 +71,10 @@
             </div>
 
         </div>
-        
-        <%- include script-links.ejs %>
+
+        <%- include("script-links", {hostname: hostname}) %>
         <%- include game-scripts.ejs %>
-    
+
 
     </body>
 

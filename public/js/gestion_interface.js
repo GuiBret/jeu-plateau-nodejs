@@ -18,8 +18,8 @@ class Interface {
     genInterfaceCombat(joueur_actuel) { // Affiche les boutons attaque et défense
 
         var $div_combat = $("<div class='col-12 d-flex justify-content-around' id='boutons_combat'></div>"),
-            $btn_attaque = $(`<button class='float-left' id='btn_attaque'>${__("Attaquer")}</button>`),
-            $btn_defense = $(`<button class='float-right' id='btn_defense'>${__("Défendre")}</button>`),
+            $btn_attaque = $(`<button class='float-left' id='btn_attaque'>Attaquer</button>`),
+            $btn_defense = $(`<button class='float-right' id='btn_defense'>Défendre</button>`),
             id_joueur = joueur_actuel + 1;
 
         $div_combat.css("display", "none");

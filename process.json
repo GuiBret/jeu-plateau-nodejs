@@ -1,0 +1,9 @@
+{
+  "script":"server.js",
+  "watch": ["src", "server.js"],
+
+  "watch_options": {
+    "followSymlinks": false
+},
+"name": "mon process"
+}

@@ -15,7 +15,7 @@
                     <form>
                         <p class="text-center"> <%= __("Remplissez ce formulaire pour vous connecter :") %></p>
                         <div class="form-group">
-                            <input type="text" id="username" name="username" placeholder="<%= __("Nom d'utilisateur") %>" class="form-control"/>
+                            <input type="text" id="username" name="username" placeholder='<%= __("Nom d'utilisateur") %>' class="form-control" />
                         </div>
                         <div class="form-group">
                             <input type="password" id="password" name="password" placeholder="<%= __("Mot de passe") %>" class="form-control"/>
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <%- include script-links.ejs %>
+        <%- include("script-links", {"hostname": hostname}) %>
         <script type="text/javascript" src="/public/js/interface/tpl-connect-panel.js"></script>
     </body>
 

@@ -54,8 +54,8 @@ $(document).ready(function () {
 
         game_id = gameID;
 
-        var nom_j1 = prompt(__("Entrez le nom du joueur 1 : ")),
-            nom_j2 = prompt(__("Entrez le nom du joueur 2 : "));
+        var nom_j1 = prompt("Entrez le nom du joueur 1 : "),
+            nom_j2 = prompt("Entrez le nom du joueur 2 : ");
 
         if(!nom_j1) {
             nom_j1 = "Joueur 1";
@@ -131,7 +131,7 @@ $(document).ready(function () {
 
 
         grille.updateGrille(nv_grille); // Réétablit la grille telle que modifiée sur le serveur
-        
+
         if (typeof arme === "number" && arme !== -1) { // If one of the players stepped on a new weapon
             gestionNouvelleArme(cur_player, arme);
         }

@@ -86,10 +86,10 @@ function defineOptions() { // Defines the options in sessionStorage
 }
 
 function sendOptionsToServer() {
-    let language_val = getCookie("locale");
-    
-    let new_options = {"volume": sessionStorage.getItem("volume"), "animations": sessionStorage.getItem("animations"), "language": language_val, "joueur_concerne": parseInt(sessionStorage.getItem("id"))};
+    let language_val = document.querySelector(".current").id;
 
+    let new_options = {"volume": sessionStorage.getItem("volume"), "animations": sessionStorage.getItem("animations"), "language": language_val, "joueur_concerne": parseInt(sessionStorage.getItem("id"))};
+    console.log(new_options);
     $.ajax({ /* Sending a POST request to the server so that it updates the database with the new values */
                 type: "POST",
                 data:JSON.stringify(new_options),

@@ -1,6 +1,6 @@
 
 
-var socket = io.connect((window.location.hostname === "localhost") ? "http://localhost:5000" : `http://${window.location.hostname}:5000`);
+var socket = io.connect(`http://${window.location.hostname}:5000`);
 
 
 if(sessionStorage.getItem("id") && sessionStorage.getItem("id") !== -1) { // If user credentials already are in the sessionstorage, we redirect the user to the main menu
@@ -17,7 +17,14 @@ $("document").ready(function() {
     $("#connect-button").on("click", (e) => {
         e.preventDefault();
 
-        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val(), "language": __.getLocale()}; // The language will only be used in a user creation
+
+        // Tries to detect the user's language based on window.navigator.language value
+
+        let userLanguage = window.navigator.language || window.navigator.userLanguage,
+            splitted_user_language = userLanguage.split(/[_-]/)[0].toLowerCase();
+
+        console.log(splitted_user_language)
+        let connectionInfo = {"username": $("#username").val(), "password": $("#password").val(), "language": splitted_user_language}; // The language will only be used in a user creation
 
 
         $.ajax({ /* Sending a POST request to the server which will get this user / create it and update the locale */
@@ -30,7 +37,7 @@ $("document").ready(function() {
             let $dialog;
             document.cookie = `locale=${userData.language}`; // We set the locale as a cookie so that the server gets it on each request
              if(userData.new_user) { // If we've had to create a new user
-                 $dialog = $(`<div id="confirmation_connection" title="Compte créé">${__("Le compte")} ${userData["username"]} ${__("vient d'être créé avec succès.")}</div>`);
+                 $dialog = $(`<div id="confirmation_connection" title="Compte créé">Le compte ${userData["username"]} vient d'être créé avec succès.</div>`);
 
              } else { // If it's a normal connection
                  $dialog = $(`<div id="confirmation_connection" title="Connexion réussie">Vous êtes désormais connecté en tant que ${userData["username"]}</div>`);
@@ -49,9 +56,9 @@ $("document").ready(function() {
                          sessionStorage.setItem("id", userData.id);
                          sessionStorage.setItem("animations", userData.animations);
                          sessionStorage.setItem("volume", userData.volume);
-                         alert("Meuh")
 
- -                        __.setLocale(userData.language);
+
+ // -                        __.setLocale(userData.language);
 
                          // Redirection vers le menu principal
 
@@ -94,5 +101,5 @@ function defineGuestConnectionData() {
     sessionStorage.setItem("volume", .5);
     sessionStorage.setItem("language", __.getLocale());
 
-    window.location.replace("menu/");
+    window.location.replace("./menu/");
 }

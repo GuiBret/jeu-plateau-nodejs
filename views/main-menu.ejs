@@ -5,47 +5,47 @@
         <%- include header-links.ejs %>
         <link rel="stylesheet" href="/public/css/main-menu.css" />
         <title><%= __("Menu principal") %></title>
-    
+
     </head>
     <body>
-        
+
         <div class="container-fluid">
             <h1 class="col-12 text-md-center" id="page-title"><%= __("Jusqu'a la mort") %></h1>
-            
+
             <div id="container-buttons" class="d-flex flex-column col-12 justify-content-around">
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_1v1_online">
                     <button class="btn btn-primary" id="btn-1v1-online"><%= __("1V1 en ligne") %></button>
                     <label class="d-block text-center"><%= __("Aucun utilisateur connecté") %></label>
                 </div>
-                 
+
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_ia">
                     <button class="btn btn-primary" id="btn-ia" disabled><%= __("Duel contre l'IA") %></button>
                 </div>
-                
+
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_1v1_local">
                     <button class="btn btn-primary" id="btn-1v1-local" ><%= __("Duel en local") %> </button>
                 </div>
-                
+
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_profile" data-toggle="tooltip" disabled>
                     <button class="btn btn-primary" id="btn-profile" data-toggle="tooltip" data-placement="bottom" disabled><%= __("Mon profil") %></button>
                 </div>
-                
+
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_options">
                     <button type="button" class="btn btn-secondary" id="btn-options"><%= __("Options") %></button>
                 </div>
-                
+
                 <div class="button_container col-12 col-md-6 offset-md-3" id="container_btn_disconnect">
                     <button class="btn btn-primary" id="btn-disconnect"><%= __("Déconnexion") %></button>
                 </div>
-            
-            </div> 
+
+            </div>
             <%- include connected-as.ejs %>
-            
+
         </div>
-        <%- include script-links.ejs %>
+        <%- include("script-links", {hostname:hostname}) %>
         <script type="text/javascript" src="/public/js/interface/components/connected-as.js"></script>
         <script type="text/javascript" src="/public/js/interface/main-menu.js"></script>
-    
+
     </body>
 
 

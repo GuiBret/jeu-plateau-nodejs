@@ -10,23 +10,23 @@ class Arme {
 
             case 1: // Arme standard
                 this.degats = 10;
-                this.nom = __("Revolver");
+                this.nom = "Revolver";
             break;
 
             case 2:
                 this.degats = 15
-                this.nom = __("Fusil");
+                this.nom = "Fusil";
             break;
             case 3:
                 this.degats = 20;
-                this.nom = __("Fusil à pompe");
+                this.nom = "Fusil à pompe";
             break;
             case 4:
                 this.degats = 25;
-                this.nom = __("Lance-roquette");
+                this.nom = "Lance-roquette";
             break;
 
-        }       
+        }
     }
 
     getDesignArmeJoueur() {
