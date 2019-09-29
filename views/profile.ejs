@@ -4,26 +4,26 @@
     <head>
         <%- include header-links.ejs %>
         <link rel="stylesheet" type="text/css" href="/public/css/tpl-connect-panel.css" />
-
+        <link rel="stylesheet" type="text/css" href="/public/css/profile.css" />
         <title>Mon profil</title>
     </head>
     <body>
         <div class="container-fluid">
             <h1 class="text-center">Mon profil</h1>
-            
+
             <div class="col-12 col-md-6 offset-md-3">
-                <p><strong>Nom : </strong><span id="nom"></span></p>
+                <p><strong>Nom : </strong><span id="nom"><%= info.username %></span></p>
                 <h4><strong>vos victoires</strong></h4>
-                <p><strong>En ligne : </strong>: <span id="online_wins"></span></p>
-                <p><strong>Contre l'IA : </strong>: <span id="ai_wins"></span></p>
+                <p><strong>En ligne : </strong> <span id="online_wins"><%= info.online_wins %></span> <progress id="progress_online" max="<%= info.online_matches %>" value="<%= info.online_wins %>"></progress></p>
+                <p><strong>Contre l'IA : </strong><span id="ai_wins"><%= info.ai_wins %></span> <progress id="progress_online" max="<%= info.ai_matches %>" value="<%= info.ai_wins %>"></progress></p>
                 <p><strong>Leaderboard : </strong><span id="leaderboard-rank"></span></p>
-                
-                
-                
+
+
+
             </div>
         </div>
         <%- include connected-as.ejs %>
-        <%- include script-links.ejs %>
+        <%- include("script-links", {hostname:hostname}) %>
         <script type="text/javascript" src="/public/js/interface/profile.js"></script>
     </body>
 

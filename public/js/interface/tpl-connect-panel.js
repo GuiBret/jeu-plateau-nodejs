@@ -35,7 +35,7 @@ $("document").ready(function() {
         }).then((userData) => {
 
             let $dialog;
-            if(userData.result == "KO") {
+            if(userData.result == "KO") { 
                 alert("Le mot de passe est incorrect");
                 document.getElementById('password').value = "";
 
@@ -103,11 +103,11 @@ function listenerFormConnexion() {
 }
 
 function defineGuestConnectionData() {
-    sessionStorage.setItem("username", __("Invité"));
+    sessionStorage.setItem("username", "Invité");
     sessionStorage.setItem("id", "-1");
     sessionStorage.setItem("animations", 1);
     sessionStorage.setItem("volume", .5);
-    sessionStorage.setItem("language", __.getLocale());
+    sessionStorage.setItem("language", "fr");
 
     window.location.replace("./menu/");
 }

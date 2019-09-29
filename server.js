@@ -31,9 +31,8 @@ app.use(cookieParser());
 app.use(function(req, res, next) {
   res.locals.__ = res.__ = function() {
       return i18n.__.apply(req, arguments)
-  };
-  
-  next();
+  }
+  next();  
 });
 
 

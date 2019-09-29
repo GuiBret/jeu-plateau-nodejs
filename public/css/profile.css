@@ -1,0 +1,16 @@
+#progress_ai, #progress_online {
+    appearance:none;
+    -webkit-appearance: none;
+}
+
+#progress_ai::-webkit-progress-value, #progress_online::-webkit-progress-value {
+    border-radius:5px;
+    background-color:green;
+
+}
+
+#progress_ai::-webkit-progress-bar, #progress_online::-webkit-progress-bar {
+    border-radius:5px;
+    background-color:red;
+
+}

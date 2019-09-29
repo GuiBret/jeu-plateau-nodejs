@@ -1,25 +1,25 @@
 <div id='interface_<%= val %>'>
 
-                    
+
     <h3 class='nom_joueur text-center' id='nom_j<%= val %>'><%= __("Joueur") %> <%= val %></h3>
-                    
+
     <div class="row text-center">
-    
+
         <div class="col-6 offset-3 col-md-3 offset-md-2 container-image-joueur">
-        
+
             <img class='img_interface_joueur interface-joueur<%= val %>' src='/public/img/j_arme1.png'/>
-            
+
         </div>
-        
+
         <div class="col-12 col-md-7">
-        
+  
             <span class="description-arme"><%= __("Arme") %> : <span id="nom_arme_j<%= val %>">Revolver</span></span> <br />
             <span class="degats"><%= __("Degâts") %> : <span id='degats_arme_j<%= val %>'>10</span> <%= __("PV") %></span>
-            
+
         </div>
     </div>
     <div class="col-12 text-center">
         <progress max="100" value="100" id="barre_j<%= val %>"></progress> <br />
         <span><span id='vie_j<%= val %>' class="vie text-center">100</span>/100 <%= __("PV") %></span><br />
-    </div>    
+    </div>
 </div>
